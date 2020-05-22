@@ -1,6 +1,6 @@
 # Sensor System Status Grafana dashboard
 
-Dahsboard to show system-related information about your
+Dashboard to show system-related information about your
 Luftdaten-sensor.
 
 The dashboard uses two InfluxDB data sources:
