@@ -19,6 +19,7 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
     awk -F\| -v OFS=, -v ts=${TimeStamp} \
       '
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }
+                        { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) }
        /ID:/            { gsub(/ID: +/, "", $1) ; Sensor=$1 ; next }
        /Firmware:/      { 
                           key = "Firmware" ; 
