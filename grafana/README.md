@@ -8,11 +8,5 @@ The dashboard uses two InfluxDB data sources:
 * sensor-status: information from the 'status' page as collected by the get-sensor-status.sh script
 * luftdaten: system-related information from the 'Feinstaub' database as directly stored by your sensor 
 
-The dashboard should be importable without manual changes **except** for
-the two panels that are in German:
-
-* Anzahl Messungen
-* Dauer Messübertragung
-
-These will only work as-is when you have your sensor set to German. If
-you use any other language please edit those panels as needed.
+Pick the appropriate language version for your sensor for importing into
+Grafana.
