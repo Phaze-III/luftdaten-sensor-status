@@ -3,7 +3,7 @@
 INTL_NUMBER_OF_MEASUREMENTS="Anzahl Messungen"
 INTL_TIME_SENDING_MS="Dauer Messübertragung"
 
-for lang in bg cz dk en es fr it lu nl pl pt rs ru se tr ua sk
+for lang in bg cz dk en es fr it lu nl pl pt rs ru se tr ua sk hu
 do
   cp -p "Sensor System Status-de.json" "Sensor System Status-${lang}.json"
 done
@@ -52,4 +52,6 @@ ua INTL_NUMBER_OF_MEASUREMENTS "Кількість вимірювань"
 ua INTL_TIME_SENDING_MS "Час, витрачений на відправлення"
 sk INTL_NUMBER_OF_MEASUREMENTS "Počet meraní"
 sk INTL_TIME_SENDING_MS "Trvanie odosielania dát"
-
+hu INTL_NUMBER_OF_MEASUREMENTS "Mérések száma:"
+hu INTL_TIME_SENDING_MS "Feltöltéssel töltött idő:"
+EOT
