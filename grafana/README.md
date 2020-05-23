@@ -11,7 +11,7 @@ The dashboard uses two InfluxDB data sources:
 The dashboard should be importable without manual changes **except** for
 the two panels that are in German:
 
-* Messungen
+* Anzahl Messungen
 * Dauer Messübertragung
 
 These will only work as-is when you have your sensor set to German. If
