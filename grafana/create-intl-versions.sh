@@ -3,7 +3,7 @@
 INTL_NUMBER_OF_MEASUREMENTS="Anzahl Messungen"
 INTL_TIME_SENDING_MS="Dauer Messübertragung"
 
-for lang in bg cz dk en es fr it lu nl pl pt rs ru se tr ua sk hu
+for lang in bg cz dk en es fr hu it lu nl pl pt rs ru se sk tr ua
 do
   cp -p "Sensor System Status-de.json" "Sensor System Status-${lang}.json"
 done
@@ -30,6 +30,8 @@ es INTL_NUMBER_OF_MEASUREMENTS "Numero de mediciones"
 es INTL_TIME_SENDING_MS "Tiempo empleado para enviar"
 fr INTL_NUMBER_OF_MEASUREMENTS "Nombre de mesures"
 fr INTL_TIME_SENDING_MS "Durée de la transmission des mesures"
+hu INTL_NUMBER_OF_MEASUREMENTS "Mérések száma:"
+hu INTL_TIME_SENDING_MS "Feltöltéssel töltött idő:"
 it INTL_NUMBER_OF_MEASUREMENTS "Numero di misurazioni"
 it INTL_TIME_SENDING_MS "Tempo impiegato per l'invio"
 lu INTL_NUMBER_OF_MEASUREMENTS "Zuel vu Mesuren"
@@ -46,12 +48,10 @@ ru INTL_NUMBER_OF_MEASUREMENTS "Количество измерений"
 ru INTL_TIME_SENDING_MS "Время, потраченное на отправку"
 se INTL_NUMBER_OF_MEASUREMENTS "Antal mätningar"
 se INTL_TIME_SENDING_MS "Tid som skickas i att skicka"
+sk INTL_NUMBER_OF_MEASUREMENTS "Počet meraní"
+sk INTL_TIME_SENDING_MS "Trvanie odosielania dát"
 tr INTL_NUMBER_OF_MEASUREMENTS "Ölçümlerin sayısı"
 tr INTL_TIME_SENDING_MS "Göndermede harcanan süre"
 ua INTL_NUMBER_OF_MEASUREMENTS "Кількість вимірювань"
 ua INTL_TIME_SENDING_MS "Час, витрачений на відправлення"
-sk INTL_NUMBER_OF_MEASUREMENTS "Počet meraní"
-sk INTL_TIME_SENDING_MS "Trvanie odosielania dát"
-hu INTL_NUMBER_OF_MEASUREMENTS "Mérések száma:"
-hu INTL_TIME_SENDING_MS "Feltöltéssel töltött idő:"
 EOT
