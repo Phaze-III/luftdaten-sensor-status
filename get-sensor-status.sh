@@ -28,7 +28,7 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
                         }
        !/\|/            { next }
        /\|[A-Za-z0-9]+/ { 
-                          if ( $2 ~ /^ *$|Parameter|Firmware/) { next } ;
+                          if ( $2 ~ /^ *$|^(Par|Пара)|Firmware/) { next } ;
                           if ( $3 ~ /^ *$/) { next } ;
                           gsub(/ ms$/, "", $3) ;
                           gsub(/ %$/, "", $3) ;
@@ -38,6 +38,7 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
                         }
        /SDS011.*[A-Za-z]+/                { key = ( $2 " Version" ) }
        /WiFi|SDS011[|0-9]+$|Data Send\|/  { key = ( key " Errors" ) }
+       /SPS30[|0-9]+$/                    { key = ( key " Errors" ) }
        /Reset Reason/   {
                           reason = $3 ;
                           gsub(/^[ \t]+|[ \t]+$/, "", reason) ;
