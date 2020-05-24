@@ -18,8 +18,8 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
     html2text -ascii |\
     awk -F\| -v OFS=, -v ts=${TimeStamp} \
       '
-                        { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }
-                        { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) }
+                        { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
+                        { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
        /ID:/            { gsub(/ID: +/, "", $1) ; Sensor=$1 ; next }
        /Firmware:/      { 
                           key = "Firmware" ; 
