@@ -19,5 +19,5 @@ echo "### List of languages:"
 echo $(ls -1 "${SrcDir}"/intl_??.h | sed -e 's/^.*intl_\(..\).h.*/\1/')
 
 echo "### List of INTL_* strings for Grafana Dashboard:"
-egrep 'INTL_(NUMBER_OF_MEASUREMENT|TIME_SENDING)' "${SrcDir}"/intl_??.h \
+egrep 'INTL_(ERROR|NUMBER_OF_MEASUREMENT|TIME_SENDING)' "${SrcDir}"/intl_??.h \
    | sed -e 's/^.*intl_//' -e 's/.h:#define//'

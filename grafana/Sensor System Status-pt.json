@@ -29,6 +29,13 @@
       "label": "INTL_TIME_SENDING_MS",
       "value": "Duração da transmissão das medições",
       "description": ""
+    },
+    {
+      "name": "VAR_INTL_ERROR",
+      "type": "constant",
+      "label": "INTL_ERROR",
+      "value": "erro",
+      "description": ""
     }
   ],
   "__requires": [
@@ -81,7 +88,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1590326005900,
+  "iteration": 1590326005903,
   "links": [],
   "panels": [
     {
@@ -960,7 +967,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Errors",
+      "title": "$INTL_ERROR",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1918,6 +1925,24 @@
           }
         ],
         "query": "${VAR_INTL_TIME_SENDING_MS}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "value": "${VAR_INTL_ERROR}",
+          "text": "${VAR_INTL_ERROR}"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "INTL_ERROR",
+        "options": [
+          {
+            "value": "${VAR_INTL_ERROR}",
+            "text": "${VAR_INTL_ERROR}"
+          }
+        ],
+        "query": "${VAR_INTL_ERROR}",
         "skipUrlSync": false,
         "type": "constant"
       }
