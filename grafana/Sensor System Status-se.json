@@ -81,7 +81,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1590234593137,
+  "iteration": 1590326005900,
   "links": [],
   "panels": [
     {
@@ -775,6 +775,7 @@
     {
       "aliasColors": {
         "SDS011": "dark-red",
+        "SPS30": "dark-red",
         "WiFi": "semi-dark-yellow"
       },
       "bars": false,
@@ -857,6 +858,51 @@
               "key": "key",
               "operator": "=",
               "value": "SDS011 Errors"
+            }
+          ]
+        },
+        {
+          "alias": "SPS30",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"value\") FROM /^$Sensor$/ WHERE (\"key\" = 'Sensirion SPS30 Errors') AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Sensirion SPS30 Errors"
             }
           ]
         },
