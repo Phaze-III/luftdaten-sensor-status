@@ -88,7 +88,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1590407343092,
+  "iteration": 1590415842285,
   "links": [],
   "panels": [
     {
@@ -1401,6 +1401,45 @@
               {
                 "params": [
                   "Software Watchdog"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Unknown",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT distinct(\"Unknown\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval)",
+          "rawQuery": false,
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Unknown"
                 ],
                 "type": "field"
               },
