@@ -1540,7 +1540,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -1664,7 +1670,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -1786,7 +1798,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -1909,7 +1927,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -1987,29 +2011,6 @@
         "useTags": false
       },
       {
-        "allValue": null,
-        "current": {},
-        "datasource": "${DS_LUFTDATEN}",
-        "definition": "show measurements",
-        "hide": 1,
-        "includeAll": false,
-        "index": -1,
-        "label": "Sensor",
-        "multi": false,
-        "name": "Measurement",
-        "options": [],
-        "query": "show measurements",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
         "current": {
           "value": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}",
           "text": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}"
@@ -2062,6 +2063,52 @@
         "query": "${VAR_INTL_ERROR}",
         "skipUrlSync": false,
         "type": "constant"
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_LUFTDATEN}",
+        "definition": "show measurements",
+        "hide": 1,
+        "includeAll": false,
+        "index": -1,
+        "label": "Sensor",
+        "multi": false,
+        "name": "Measurement",
+        "options": [],
+        "query": "show measurements",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_LUFTDATEN}",
+        "definition": "SHOW TAG VALUES WITH KEY = node WHERE (_name =~ /^$Measurement$/)",
+        "hide": 1,
+        "includeAll": false,
+        "index": -1,
+        "label": null,
+        "multi": false,
+        "name": "Node",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = node WHERE (_name =~ /^$Measurement$/)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
