@@ -47,6 +47,7 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
                           fields=( reason "=true," );
                         }
        /Uptime|Last OTA/ {
+                          days=0; hours=0; mins=0; secs=0;
                           split($3, time, ",");
                           for (i in time) {
                              if (time[i] ~ / days/)  { gsub(/^ | days/, "", time[i])  ; days=time[i] } ;
