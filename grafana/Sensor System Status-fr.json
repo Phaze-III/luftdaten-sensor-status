@@ -88,7 +88,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1596382021955,
+  "iteration": 1596385084921,
   "links": [],
   "panels": [
     {
@@ -307,12 +307,6 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "$$hashKey": "object:215",
-          "alias": "Data Send Errors",
-          "color": "#E02F44",
-          "fill": 0
-        },
-        {
           "$$hashKey": "object:1011",
           "alias": "Nombre de mesures",
           "color": "#3274D9"
@@ -364,55 +358,6 @@
               "key": "key",
               "operator": "=~",
               "value": "/^$INTL_NUMBER_OF_MEASUREMENTS$/"
-            }
-          ]
-        },
-        {
-          "alias": "Data Send Errors",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Data Send"
-            },
-            {
-              "condition": "OR",
-              "key": "key",
-              "operator": "=",
-              "value": "Data Send Errors"
             }
           ]
         }
