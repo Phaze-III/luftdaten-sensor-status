@@ -20,7 +20,7 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
       '
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
-       /ID:/            { gsub(/ID: +/, "", $1) ; Sensor=$1 ; next }
+       /ID:/            { gsub(/ID: +/, "", $1) ; gsub(/ (.*)/, "", $1) ; Sensor=$1 ; next }
        /Firmware:/      { 
                           key = "Firmware" ; 
                           gsub(/Firmware: +/, "", $1) ;
@@ -40,6 +40,8 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
        /SDS011.*[A-Za-z]+/                { key = ( $2 " Version" ) }
        /WiFi|SDS011[|0-9]+$|Data Send\|/  { key = ( key " Errors" ) }
        /SPS30[|0-9]+$/                    { key = ( key " Errors" ) }
+       key ~ /Sensor.Community|Madavi.de|OpenSenseMap.org|Feinstaub-App|aircms.online|InfluxDB|Custom/ \
+                                          { key = ( key " API" ) }
        /Reset Reason/   {
                           reason = $3 ;
                           gsub(/^[ \t]+|[ \t]+$/, "", reason) ;

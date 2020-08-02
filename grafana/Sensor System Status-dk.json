@@ -49,7 +49,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.7.3"
+      "version": "6.7.4"
     },
     {
       "type": "panel",
@@ -88,7 +88,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1590685454614,
+  "iteration": 1596382021955,
   "links": [],
   "panels": [
     {
@@ -826,6 +826,48 @@
           "alias": "Data Send",
           "color": "#5794F2",
           "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:2005",
+          "alias": "InfluxDB",
+          "color": "#5794F2",
+          "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:2012",
+          "alias": "Madavi.de",
+          "color": "#73BF69",
+          "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:2428",
+          "alias": "Sensor.Community",
+          "color": "#B877D9",
+          "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:2881",
+          "alias": "OpenSenseMap.org",
+          "color": "#FF9830",
+          "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:2893",
+          "alias": "Feinstaub-App",
+          "color": "#8F3BB8",
+          "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:3418",
+          "alias": "aircms.online",
+          "color": "#FFCB7D",
+          "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:3430",
+          "alias": "Custom",
+          "color": "#C8F2C2",
+          "yaxis": 2
         }
       ],
       "spaceLength": 10,
@@ -985,6 +1027,7 @@
               "type": "fill"
             }
           ],
+          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1009,6 +1052,314 @@
               "key": "key",
               "operator": "=",
               "value": "Data Send Errors"
+            }
+          ]
+        },
+        {
+          "alias": "InfluxDB",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "InfluxDB API"
+            }
+          ]
+        },
+        {
+          "alias": "Madavi.de",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Madavi.de API"
+            }
+          ]
+        },
+        {
+          "alias": "Sensor.Community",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Sensor.Community API"
+            }
+          ]
+        },
+        {
+          "alias": "OpenSenseMap.org",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "OpenSenseMap.org API"
+            }
+          ]
+        },
+        {
+          "alias": "Feinstaub-App",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Feinstaub-App API"
+            }
+          ]
+        },
+        {
+          "alias": "aircms.online",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "aircms.online API"
+            }
+          ]
+        },
+        {
+          "alias": "Custom",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Custom API"
             }
           ]
         }
@@ -1048,7 +1399,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         }
       ],
@@ -1193,7 +1544,7 @@
         "orientation": "vertical",
         "showUnfilled": false
       },
-      "pluginVersion": "6.7.3",
+      "pluginVersion": "6.7.4",
       "targets": [
         {
           "alias": "Exception",

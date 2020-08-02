@@ -18,6 +18,9 @@ else
    echo "### Uptime related human readable strings:"
    grep -h 'PSTR.*time_ms' "${SrcDirAirrohr}"/*.ino "${SrcDirAirrohr}"/*.cpp
 
+   echo "### API error count strings:"
+   echo $(grep 'logger = F' "${SrcDirAirrohr}"/utils.cpp | sed 's/.*(\"\(.*\)\").*/\1/') | tr ' ' '|'
+
    echo "### INTL_PARAMETER string prefixes for get-sensor-status.sh"
    grep 'INTL_PARAMETER' "${SrcDirAirrohr}"/intl_??.h \
       | cut -d\" -f2 | cut -c1-3 | sort | uniq -c
