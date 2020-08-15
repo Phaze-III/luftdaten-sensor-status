@@ -335,8 +335,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"value\") FROM /^$Sensor$/ WHERE (\"key\" =~ /^$INTL_NUMBER_OF_MEASUREMENTS$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -654,8 +652,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"value\") FROM /^$Sensor$/ WHERE (\"key\" =~ /^$INTL_TIME_SENDING_MS$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -976,8 +972,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"value\") FROM /^$Sensor$/ WHERE (\"key\" = 'Sensirion SPS30 Errors') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "C",
           "resultFormat": "time_series",
           "select": [
@@ -1504,8 +1498,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"string\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval), \"key\"",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1543,8 +1535,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"string\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval), \"key\"",
-          "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -1582,8 +1572,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"string\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval), \"key\"",
-          "rawQuery": false,
           "refId": "C",
           "resultFormat": "time_series",
           "select": [
@@ -1621,8 +1609,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"Hardware Watchdog\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval)",
-          "rawQuery": false,
           "refId": "D",
           "resultFormat": "time_series",
           "select": [
@@ -1660,8 +1646,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"Software/System restart\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval)",
-          "rawQuery": false,
           "refId": "E",
           "resultFormat": "time_series",
           "select": [
@@ -1699,8 +1683,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"Deep-Sleep Wake\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval)",
-          "rawQuery": false,
           "refId": "F",
           "resultFormat": "time_series",
           "select": [
@@ -1738,8 +1720,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"Software Watchdog\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval)",
-          "rawQuery": false,
           "refId": "G",
           "resultFormat": "time_series",
           "select": [
@@ -1777,8 +1757,6 @@
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"Unknown\") FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($interval)",
-          "rawQuery": false,
           "refId": "H",
           "resultFormat": "time_series",
           "select": [
