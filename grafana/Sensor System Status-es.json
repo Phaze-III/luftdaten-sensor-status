@@ -88,7 +88,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1597503046267,
+  "iteration": 1597504409707,
   "links": [],
   "panels": [
     {
@@ -271,7 +271,7 @@
     },
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": "${DS_SENSOR-STATUS}",
@@ -295,7 +295,7 @@
         "total": false,
         "values": false
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
@@ -348,6 +348,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -821,7 +825,7 @@
         "SPS30": "dark-red",
         "WiFi": "semi-dark-yellow"
       },
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": "${DS_SENSOR-STATUS}",
@@ -846,7 +850,7 @@
         "total": false,
         "values": false
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
@@ -860,54 +864,46 @@
         {
           "$$hashKey": "object:315",
           "alias": "Data Send",
-          "color": "#5794F2",
-          "yaxis": 2
+          "color": "#5794F2"
         },
         {
           "$$hashKey": "object:2005",
           "alias": "InfluxDB",
-          "color": "#5794F2",
-          "yaxis": 2
+          "color": "#5794F2"
         },
         {
           "$$hashKey": "object:2012",
           "alias": "Madavi.de",
-          "color": "#73BF69",
-          "yaxis": 2
+          "color": "#73BF69"
         },
         {
           "$$hashKey": "object:2428",
           "alias": "Sensor.Community",
-          "color": "#B877D9",
-          "yaxis": 2
+          "color": "#B877D9"
         },
         {
           "$$hashKey": "object:2881",
           "alias": "OpenSenseMap.org",
-          "color": "#FF9830",
-          "yaxis": 2
+          "color": "#FF9830"
         },
         {
           "$$hashKey": "object:2893",
           "alias": "Feinstaub-App",
-          "color": "#8F3BB8",
-          "yaxis": 2
+          "color": "#8F3BB8"
         },
         {
           "$$hashKey": "object:3418",
           "alias": "aircms.online",
-          "color": "#FFCB7D",
-          "yaxis": 2
+          "color": "#FFCB7D"
         },
         {
           "$$hashKey": "object:3430",
           "alias": "Custom",
-          "color": "#C8F2C2",
-          "yaxis": 2
+          "color": "#C8F2C2"
         }
       ],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": true,
       "targets": [
         {
@@ -942,6 +938,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -985,6 +985,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1028,6 +1032,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1078,6 +1086,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1122,6 +1134,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1166,6 +1182,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1210,6 +1230,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1254,6 +1278,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1298,6 +1326,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1342,6 +1374,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1386,6 +1422,10 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
@@ -1434,7 +1474,7 @@
           "logBase": 1,
           "max": null,
           "min": "0",
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
