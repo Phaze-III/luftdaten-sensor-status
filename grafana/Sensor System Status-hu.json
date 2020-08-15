@@ -36,6 +36,13 @@
       "label": "INTL_ERROR",
       "value": "csak hibajelzések",
       "description": ""
+    },
+    {
+      "name": "VAR_INTL_DEVICE_STATUS",
+      "type": "constant",
+      "label": "INTL_DEVICE_STATUS",
+      "value": "Eszköz státusz",
+      "description": ""
     }
   ],
   "__requires": [
@@ -68,6 +75,12 @@
       "id": "influxdb",
       "name": "InfluxDB",
       "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
     }
   ],
   "annotations": {
@@ -88,83 +101,101 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1597504409707,
+  "iteration": 1597528396370,
   "links": [],
   "panels": [
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
+      "columns": [],
       "datasource": "${DS_SENSOR-STATUS}",
       "description": "",
-      "fill": 1,
-      "fillGradient": 0,
+      "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 12,
         "x": 0,
         "y": 0
       },
-      "hiddenSeries": false,
-      "id": 2,
-      "interval": "15m",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      "id": 27,
+      "interval": "",
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
       },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
+      "styles": [
         {
-          "$$hashKey": "object:4327",
-          "alias": "Last OTA",
-          "fill": 0
+          "$$hashKey": "object:1438",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "Time",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:673",
+          "alias": " ",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Metric",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": []
+        },
+        {
+          "$$hashKey": "object:2224",
+          "alias": " ",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": true,
       "targets": [
         {
-          "alias": "Uptime",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
+          "alias": "Data Send Return",
+          "groupBy": [],
+          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "A",
+          "refId": "E",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "value"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -178,26 +209,76 @@
             {
               "key": "key",
               "operator": "=",
-              "value": "Uptime"
+              "value": "Data Send Return"
             }
           ]
         },
         {
           "alias": "Last OTA",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
+          "groupBy": [],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "string"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
           ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Last OTA"
+            }
+          ]
+        },
+        {
+          "alias": "NTP Info",
+          "groupBy": [],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "string"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "NTP Info"
+            }
+          ]
+        },
+        {
+          "alias": "$INTL_NUMBER_OF_MEASUREMENTS",
+          "groupBy": [],
+          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -220,54 +301,79 @@
           "tags": [
             {
               "key": "key",
+              "operator": "=~",
+              "value": "/^$INTL_NUMBER_OF_MEASUREMENTS$/"
+            }
+          ]
+        },
+        {
+          "alias": "Uptime",
+          "groupBy": [],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "string"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
               "operator": "=",
-              "value": "Last OTA"
+              "value": "Uptime"
+            }
+          ]
+        },
+        {
+          "alias": "Firmware",
+          "groupBy": [],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "string"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Firmware"
             }
           ]
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
-      "title": "Uptime",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:977",
-          "format": "dtdurations",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:978",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "$INTL_DEVICE_STATUS",
+      "transform": "timeseries_to_rows",
+      "type": "table"
     },
     {
       "aliasColors": {},
@@ -2425,6 +2531,24 @@
           }
         ],
         "query": "${VAR_INTL_ERROR}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "value": "${VAR_INTL_DEVICE_STATUS}",
+          "text": "${VAR_INTL_DEVICE_STATUS}"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "INTL_DEVICE_STATUS",
+        "options": [
+          {
+            "value": "${VAR_INTL_DEVICE_STATUS}",
+            "text": "${VAR_INTL_DEVICE_STATUS}"
+          }
+        ],
+        "query": "${VAR_INTL_DEVICE_STATUS}",
         "skipUrlSync": false,
         "type": "constant"
       },

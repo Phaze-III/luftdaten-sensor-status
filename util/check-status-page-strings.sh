@@ -29,6 +29,6 @@ else
    echo for lang in $(ls -1 "${SrcDirAirrohr}"/intl_??.h | grep -v intl_de.h | sed -e 's/^.*intl_\(..\).h.*/\1/')
 
    echo "### List of INTL_* strings for Grafana Dashboard:"
-   egrep 'INTL_(ERROR|NUMBER_OF_MEASUREMENT|TIME_SENDING)' "${SrcDirAirrohr}"/intl_??.h \
-      | sed -e 's/^.*intl_//' -e 's/.h:#define//'
+   egrep 'INTL_(ERROR|NUMBER_OF_MEASUREMENT|TIME_SENDING|DEVICE_STATUS)' "${SrcDirAirrohr}"/intl_??.h \
+      | sed -e 's/^.*intl_//' -e 's/.h:#define//' -e 's/\(.*\)\.h:const char \(.*\)\[\] PROGMEM = \(\".*\"\).*/\1 \2 \3/'
 fi
