@@ -1,8 +1,8 @@
 #!/bin/sh
 
+INTL_ERROR="Fehler"
 INTL_NUMBER_OF_MEASUREMENTS="Anzahl Messungen"
 INTL_TIME_SENDING_MS="Dauer Messübertragung"
-INTL_ERROR="Fehler"
 
 for lang in bg cz dk en es fr hu it lu nl pl pt rs ru se sk tr ua
 do

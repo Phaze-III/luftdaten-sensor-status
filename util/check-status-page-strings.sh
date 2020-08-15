@@ -25,8 +25,8 @@ else
    grep 'INTL_PARAMETER' "${SrcDirAirrohr}"/intl_??.h \
       | cut -d\" -f2 | cut -c1-3 | sort | uniq -c
 
-   echo "### List of languages:"
-   echo $(ls -1 "${SrcDirAirrohr}"/intl_??.h | sed -e 's/^.*intl_\(..\).h.*/\1/')
+   echo "### List of languages other than 'de':"
+   echo for lang in $(ls -1 "${SrcDirAirrohr}"/intl_??.h | grep -v intl_de.h | sed -e 's/^.*intl_\(..\).h.*/\1/')
 
    echo "### List of INTL_* strings for Grafana Dashboard:"
    egrep 'INTL_(ERROR|NUMBER_OF_MEASUREMENT|TIME_SENDING)' "${SrcDirAirrohr}"/intl_??.h \
