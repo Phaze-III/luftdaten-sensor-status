@@ -101,7 +101,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1597532828909,
+  "iteration": 1597579392553,
   "links": [],
   "panels": [
     {
@@ -1260,7 +1260,7 @@
         {
           "$$hashKey": "object:5668",
           "alias": "Dauer Messübertragung",
-          "color": "yellow"
+          "color": "#FADE2A"
         }
       ],
       "spaceLength": 10,
