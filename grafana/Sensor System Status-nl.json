@@ -101,7 +101,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1597579392553,
+  "iteration": 1597616879737,
   "links": [],
   "panels": [
     {
@@ -1083,6 +1083,16 @@
           "$$hashKey": "object:3347",
           "alias": "Heap Fragmentation",
           "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:256",
+          "alias": "Reset",
+          "color": "#56A64B",
+          "hideTooltip": true,
+          "legend": false,
+          "pointradius": 4,
+          "points": true,
+          "yaxis": 2
         }
       ],
       "spaceLength": 10,
@@ -1172,6 +1182,62 @@
               "key": "key",
               "operator": "=",
               "value": "Heap Fragmentation"
+            }
+          ]
+        },
+        {
+          "alias": "Reset",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
+              },
+              {
+                "params": [
+                  "/9000"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Uptime"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": "<",
+              "value": "900"
             }
           ]
         }
