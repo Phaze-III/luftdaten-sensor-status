@@ -18,6 +18,9 @@ else
    echo "### Uptime related human readable strings:"
    grep -h 'PSTR.*time_ms' "${SrcDirAirrohr}"/*.ino "${SrcDirAirrohr}"/*.cpp
 
+   echo "### Sensor error counters:"
+   grep -h 'SENSORS_.*error' "${SrcDirAirrohr}"/*.ino "${SrcDirAirrohr}"/*.cpp
+
    echo "### API error count strings:"
    echo $(grep 'logger = F' "${SrcDirAirrohr}"/utils.cpp | sed 's/.*(\"\(.*\)\").*/\1/') | tr ' ' '|'
 
