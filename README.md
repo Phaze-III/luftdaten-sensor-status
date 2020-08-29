@@ -4,7 +4,7 @@ Fetch and convert system status info from a Luftdaten sensor to influx line prot
 # Requirements
 
 Tested on BSD (Mac OSX and FreeBSD) and Luftdaten firmware NRZ-2020-129
-with a SDS011 sensor.
+and NRZ-2020-130-B6 with a SDS011 sensor.
 
 # Dependencies
 
