@@ -101,7 +101,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1597616879737,
+  "iteration": 1598784866573,
   "links": [],
   "panels": [
     {
@@ -1308,7 +1308,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": true,
+        "show": false,
         "total": false,
         "values": false
       },
@@ -1537,7 +1537,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": true,
+        "show": false,
         "total": false,
         "values": false
       },
