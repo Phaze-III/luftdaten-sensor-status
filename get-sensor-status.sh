@@ -25,6 +25,9 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
                           key = "Firmware" ; 
                           gsub(/Firmware: +/, "", $1) ;
                           print Sensor ",key=" key " string=\"" $1 "\" " ts ;
+                          gsub(/NRZ-....-/, "", $1) ;
+                          gsub(/-.*/, "", $1) ;
+                          Version = $1 ;
                           next ;
                         }
        !/\|/            { next }
@@ -68,6 +71,16 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
                              fields=( fields "string=\"" $3 "\"" ) ;
                           }
                           print Sensor ",key=" key " " fields " " ts ;
+                          if ( key == "Uptime" && Seconds < 900 ) {
+                             if ( Version >= 130 ) {
+                                split("Sensor.Community|Madavi.de|OpenSenseMap.org|Feinstaub-App|aircms.online|InfluxDB|Custom", API, "|");
+                                for ( api in API ) {
+                                  print Sensor ",key=" API[api] "\\ API value=0 " ts ;
+                                }
+                             } else {
+                                print Sensor ",key=Data\\ Send\\ Errors value=0 " ts ;
+                             }
+                          }
                         }
       ' | curl -sS -X POST --data-binary @/dev/stdin \
              "http://${INFLUXDB_HOST}:${INFLUXDB_PORT}/write?db=${INFLUXDB_DATABASE}&precision=${INFLUXDB_PRECISION}"
