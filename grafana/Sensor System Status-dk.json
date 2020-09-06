@@ -101,7 +101,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1598784866573,
+  "iteration": 1599339684986,
   "links": [],
   "panels": [
     {
@@ -620,7 +620,7 @@
             },
             {
               "params": [
-                "null"
+                "previous"
               ],
               "type": "fill"
             }
@@ -668,7 +668,7 @@
             },
             {
               "params": [
-                "null"
+                "previous"
               ],
               "type": "fill"
             }
@@ -716,7 +716,7 @@
             },
             {
               "params": [
-                "null"
+                "previous"
               ],
               "type": "fill"
             }
@@ -764,7 +764,7 @@
             },
             {
               "params": [
-                "null"
+                "previous"
               ],
               "type": "fill"
             }
@@ -812,7 +812,7 @@
             },
             {
               "params": [
-                "null"
+                "previous"
               ],
               "type": "fill"
             }
@@ -860,7 +860,7 @@
             },
             {
               "params": [
-                "null"
+                "previous"
               ],
               "type": "fill"
             }
@@ -956,7 +956,7 @@
             },
             {
               "params": [
-                "null"
+                "previous"
               ],
               "type": "fill"
             }
