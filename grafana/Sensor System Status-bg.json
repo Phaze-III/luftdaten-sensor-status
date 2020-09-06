@@ -101,7 +101,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1599339684986,
+  "iteration": 1599398688716,
   "links": [],
   "panels": [
     {
@@ -1454,29 +1454,369 @@
       "reverseYBuckets": false,
       "targets": [
         {
-          "alias": "$col",
+          "alias": "Power On",
           "groupBy": [
             {
               "params": [
-                "key"
+                "$interval"
               ],
-              "type": "tag"
+              "type": "time"
             }
           ],
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(/^[A-Z].*/) FROM /^$Sensor$/ WHERE (\"key\" = 'Reset Reason') AND $timeFilter GROUP BY time($__interval)",
-          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "/^[A-Z].*/"
+                  "Power On"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Power on",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Power on"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Software/System restart",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Software/System restart"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Hardware Watchdog",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Hardware Watchdog"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Exception",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Exception"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "External System",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "External System"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Software Watchdog",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Software Watchdog"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Software Watchdog",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Software Watchdog"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Deep-Sleep Wake",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Deep-Sleep Wake"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
               }
             ]
           ],
@@ -1753,7 +2093,7 @@
             [
               {
                 "params": [
-                  "Power on"
+                  "Power On"
                 ],
                 "type": "field"
               },
@@ -1976,6 +2316,43 @@
               {
                 "params": [
                   "Unknown"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Reset Reason"
+            }
+          ]
+        },
+        {
+          "alias": "Power on",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Power on"
                 ],
                 "type": "field"
               },
