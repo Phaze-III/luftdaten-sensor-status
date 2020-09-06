@@ -69,5 +69,5 @@ curl -sS --connect-timeout 5 "${StatusURL}" |\
                           }
                           print Sensor ",key=" key " " fields " " ts ;
                         }
-      ' | curl -sS --include -X POST --data-binary @/dev/stdin \
+      ' | curl -sS -X POST --data-binary @/dev/stdin \
              "http://${INFLUXDB_HOST}:${INFLUXDB_PORT}/write?db=${INFLUXDB_DATABASE}&precision=${INFLUXDB_PRECISION}"
