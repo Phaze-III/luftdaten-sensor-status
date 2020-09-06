@@ -13,7 +13,7 @@ INFLUXDB_PRECISION="${INFLUXDB_PRECISION:-s}"
 
 TimeStamp=${TimeStamp:-$(date -u +%s)}
 
-curl -sS --connect-timeout 5 "${StatusURL}" |\
+curl -sS --connect-timeout 20 "${StatusURL}" |\
     tee ${StatusPage} |\
     html2text -ascii |\
     awk -F\| -v OFS=, -v ts=${TimeStamp} \
