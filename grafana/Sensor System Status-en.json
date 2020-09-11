@@ -47,12 +47,6 @@
   ],
   "__requires": [
     {
-      "type": "panel",
-      "id": "bargauge",
-      "name": "Bar Gauge",
-      "version": ""
-    },
-    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -101,7 +95,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1599820945987,
+  "iteration": 1599820945990,
   "links": [],
   "panels": [
     {
@@ -1439,7 +1433,7 @@
       "datasource": "${DS_SENSOR-STATUS}",
       "description": "",
       "gridPos": {
-        "h": 5,
+        "h": 7,
         "w": 12,
         "x": 0,
         "y": 14
@@ -1474,7 +1468,7 @@
             [
               {
                 "params": [
-                  "Power On"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -1489,43 +1483,12 @@
               "key": "key",
               "operator": "=",
               "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Power on",
-          "groupBy": [
+            },
             {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "I",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Power on"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "count"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
+              "condition": "AND",
+              "key": "string",
+              "operator": "=~",
+              "value": "/Power [Oo]n/"
             }
           ]
         },
@@ -1554,7 +1517,7 @@
             [
               {
                 "params": [
-                  "Software/System restart"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -1569,6 +1532,12 @@
               "key": "key",
               "operator": "=",
               "value": "Reset Reason"
+            },
+            {
+              "condition": "AND",
+              "key": "string",
+              "operator": "=",
+              "value": "Software/System restart"
             }
           ]
         },
@@ -1597,7 +1566,7 @@
             [
               {
                 "params": [
-                  "Hardware Watchdog"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -1612,6 +1581,12 @@
               "key": "key",
               "operator": "=",
               "value": "Reset Reason"
+            },
+            {
+              "condition": "AND",
+              "key": "string",
+              "operator": "=",
+              "value": "Hardware Watchdog"
             }
           ]
         },
@@ -1640,7 +1615,7 @@
             [
               {
                 "params": [
-                  "Exception"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -1655,6 +1630,12 @@
               "key": "key",
               "operator": "=",
               "value": "Reset Reason"
+            },
+            {
+              "condition": "AND",
+              "key": "string",
+              "operator": "=",
+              "value": "Exception"
             }
           ]
         },
@@ -1683,7 +1664,7 @@
             [
               {
                 "params": [
-                  "External System"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -1698,6 +1679,12 @@
               "key": "key",
               "operator": "=",
               "value": "Reset Reason"
+            },
+            {
+              "condition": "AND",
+              "key": "string",
+              "operator": "=",
+              "value": "External System"
             }
           ]
         },
@@ -1726,7 +1713,7 @@
             [
               {
                 "params": [
-                  "Software Watchdog"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -1741,49 +1728,12 @@
               "key": "key",
               "operator": "=",
               "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Software Watchdog",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "G",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Software Watchdog"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "count"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
+              "condition": "AND",
+              "key": "string",
               "operator": "=",
-              "value": "Reset Reason"
+              "value": "Software Watchdog"
             }
           ]
         },
@@ -1812,7 +1762,7 @@
             [
               {
                 "params": [
-                  "Deep-Sleep Wake"
+                  "string"
                 ],
                 "type": "field"
               },
@@ -1827,6 +1777,12 @@
               "key": "key",
               "operator": "=",
               "value": "Reset Reason"
+            },
+            {
+              "condition": "AND",
+              "key": "string",
+              "operator": "=",
+              "value": "Deep-Sleep Wake"
             }
           ]
         }
@@ -1995,388 +1951,6 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "datasource": "${DS_SENSOR-STATUS}",
-      "description": "",
-      "gridPos": {
-        "h": 2,
-        "w": 12,
-        "x": 0,
-        "y": 19
-      },
-      "id": 17,
-      "interval": "15m",
-      "options": {
-        "displayMode": "basic",
-        "fieldOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "defaults": {
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "super-light-red",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "title": "${__series.name}",
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "orientation": "vertical",
-        "showUnfilled": false
-      },
-      "pluginVersion": "6.7.4",
-      "targets": [
-        {
-          "alias": "Exception",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Exception"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Power On",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Power On"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "External System",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "External System"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Hardware Watchdog",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Hardware Watchdog"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Software/System restart",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "E",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Software/System restart"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Deep-Sleep Wake",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Deep-Sleep Wake"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Software Watchdog",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "G",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Software Watchdog"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Unknown",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "H",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Unknown"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        },
-        {
-          "alias": "Power on",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "I",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Power on"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Reset Reason"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "bargauge"
     },
     {
       "aliasColors": {},
