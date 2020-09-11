@@ -48,8 +48,9 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
        /Reset Reason/   {
                           reason = $3 ;
                           gsub(/^[ \t]+|[ \t]+$/, "", reason) ;
-                          gsub(/ /, "\\ ", reason) ;
-                          fields=( reason "=true," );
+                          if ( tsboot > 1 ) {
+                             print Sensor ",Reset=1,key=Reset\\ Reason string=\"" reason "\",value=0,qtime=" ts " " tsboot ;
+                          }
                         }
        /Uptime|Last OTA/ {
                           days=0; hours=0; mins=0; secs=0;
@@ -71,14 +72,20 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                              fields=( fields "string=\"" $3 "\"" ) ;
                           }
                           print Sensor ",key=" key " " fields " " ts ;
-                          if ( key == "Uptime" && Seconds < 900 ) {
+                          if ( key == "Uptime" && Seconds < 3600 ) {
+                             tsboot = ts - Seconds ;
+                             print Sensor ",Reset=1,key=Last\\ OTA string=\"-\",value=0,qtime=" ts " " tsboot ;
+                             split("Wifi|SDS011|Sensirion\\ SPS30", ERRORS, "|") ;
+                             for ( error in ERRORS ) {
+                                print Sensor ",Reset=1,key=" ERRORS[error] "\\ Errors value=0,qtime=" ts " " tsboot ;
+                             }
                              if ( Version >= 130 ) {
                                 split("Sensor.Community|Madavi.de|OpenSenseMap.org|Feinstaub-App|aircms.online|InfluxDB|Custom", API, "|");
                                 for ( api in API ) {
-                                  print Sensor ",key=" API[api] "\\ API value=0 " ts ;
+                                  print Sensor ",Reset=1,key=" API[api] "\\ API value=0,qtime=" ts " " tsboot ;
                                 }
                              } else {
-                                print Sensor ",key=Data\\ Send\\ Errors value=0 " ts ;
+                                print Sensor ",Reset=1,key=Data\\ Send\\ Errors value=0,qtime=" ts " " tsboot ;
                              }
                           }
                         }
