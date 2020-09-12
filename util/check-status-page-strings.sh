@@ -9,6 +9,10 @@ then
 else
    echo "### Reset Reasons:"
    grep -h 'case REASON_' "${SrcDirArduino}"/*.cpp
+   if [ $? -eq 1 ]
+   then
+      grep -A 1 -h 'resetInfo.reason == REASON_' "${SrcDirArduino}"/*.cpp
+   fi
 fi
 
 if [ ! -r "${SrcDirAirrohr}" ]
