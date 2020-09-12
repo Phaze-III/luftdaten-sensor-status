@@ -95,7 +95,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1599820945990,
+  "iteration": 1599822474621,
   "links": [],
   "panels": [
     {
@@ -452,6 +452,17 @@
           "$$hashKey": "object:3430",
           "alias": "Custom",
           "color": "#C8F2C2"
+        },
+        {
+          "$$hashKey": "object:2069",
+          "alias": "Reset",
+          "bars": false,
+          "color": "#56A64B",
+          "legend": false,
+          "lines": false,
+          "pointradius": 4,
+          "points": true,
+          "stack": false
         }
       ],
       "spaceLength": 10,
@@ -986,6 +997,32 @@
               "key": "key",
               "operator": "=",
               "value": "Custom API"
+            }
+          ]
+        },
+        {
+          "alias": "Reset",
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Reset",
+              "operator": "=",
+              "value": "1"
             }
           ]
         }
