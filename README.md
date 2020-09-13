@@ -1,5 +1,5 @@
 # luftdaten-sensor-status
-Fetch and convert system status info from a Luftdaten sensor to influx line protocol
+Fetch system status info from a Luftdaten sensor and convert to influx line protocol
 
 # Requirements
 
@@ -16,7 +16,7 @@ and NRZ-2020-130-B6 with a SDS011 sensor.
 
 * Create a new InfluxDB with 'create database "sensor-status"'
 * Modify the Status\*- and INFLUXDB-settings in get-sensor-status.sh as needed
-* Run the script from cron, for exampe every 15 minutes
+* Run the script from cron every 15 minutes
 
 # Additional information
 
