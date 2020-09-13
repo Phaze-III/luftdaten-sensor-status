@@ -95,14 +95,14 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1599822474621,
+  "iteration": 1599822474624,
   "links": [],
   "panels": [
     {
       "columns": [],
       "datasource": "${DS_SENSOR-STATUS}",
       "description": "",
-      "fontSize": "100%",
+      "fontSize": "90%",
       "gridPos": {
         "h": 7,
         "w": 12,
