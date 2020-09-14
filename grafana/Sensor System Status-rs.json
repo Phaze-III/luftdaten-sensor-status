@@ -101,6 +101,19 @@
         "showIn": 0,
         "tags": [],
         "type": "tags"
+      },
+      {
+        "$$hashKey": "object:343",
+        "datasource": "${DS_SENSOR-STATUS}",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#8AB8FF",
+        "limit": 100,
+        "name": "Annotations",
+        "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"key\" = 'Annotation') AND $timeFilter",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
@@ -108,7 +121,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1600015166255,
+  "iteration": 1600015166258,
   "links": [],
   "panels": [
     {
