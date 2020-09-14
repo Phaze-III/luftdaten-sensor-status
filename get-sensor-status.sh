@@ -15,6 +15,7 @@ TimeStamp=${TimeStamp:-$(date -u +%s)}
 
 curl -sS --connect-timeout 20 "${StatusURL}" |\
     tee ${StatusPage} |\
+    sed "s/<table /<table border=\'1\' /" |\
     html2text -ascii |\
     awk -F\| -v OFS=, -v ts=${TimeStamp} \
       '
