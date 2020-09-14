@@ -88,6 +88,19 @@
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
         "type": "dashboard"
+      },
+      {
+        "$$hashKey": "object:6029",
+        "datasource": "${DS_SENSOR-STATUS}",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#AD0317",
+        "limit": 100,
+        "name": "Resets",
+        "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"Reset\" = '1' AND \"key\" = 'Reset Reason') AND $timeFilter",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
@@ -95,7 +108,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1599822474624,
+  "iteration": 1600015166255,
   "links": [],
   "panels": [
     {
@@ -452,17 +465,6 @@
           "$$hashKey": "object:3430",
           "alias": "Custom",
           "color": "#C8F2C2"
-        },
-        {
-          "$$hashKey": "object:2069",
-          "alias": "Reset",
-          "bars": false,
-          "color": "#56A64B",
-          "legend": false,
-          "lines": false,
-          "pointradius": 4,
-          "points": true,
-          "stack": false
         }
       ],
       "spaceLength": 10,
@@ -999,32 +1001,6 @@
               "value": "Custom API"
             }
           ]
-        },
-        {
-          "alias": "Reset",
-          "groupBy": [],
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "L",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "Reset",
-              "operator": "=",
-              "value": "1"
-            }
-          ]
         }
       ],
       "thresholds": [],
@@ -1116,16 +1092,6 @@
           "$$hashKey": "object:3347",
           "alias": "Heap Fragmentation",
           "yaxis": 2
-        },
-        {
-          "$$hashKey": "object:256",
-          "alias": "Reset",
-          "color": "#56A64B",
-          "hideTooltip": true,
-          "legend": false,
-          "pointradius": 4,
-          "points": true,
-          "yaxis": 2
         }
       ],
       "spaceLength": 10,
@@ -1215,62 +1181,6 @@
               "key": "key",
               "operator": "=",
               "value": "Heap Fragmentation"
-            }
-          ]
-        },
-        {
-          "alias": "Reset",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "/^$Sensor$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "min"
-              },
-              {
-                "params": [
-                  "/9000"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "key",
-              "operator": "=",
-              "value": "Uptime"
-            },
-            {
-              "condition": "AND",
-              "key": "value",
-              "operator": "<",
-              "value": "900"
             }
           ]
         }
