@@ -11,7 +11,7 @@ and NRZ-2020-130-B6 to B9 with a SDS011 sensor.
 
 # Dependencies
 
-The script depends on curl and html2text, both most likely available in
+The script depends on _curl_ and _html2text_, both most likely available in
 the package repositories of your OS distribution. Source code is available
 at:
 
@@ -22,7 +22,7 @@ at:
 
 # Usage
 
-* Create a new InfluxDB with 'create database "sensor-status"'
+* Create a new InfluxDB with `create database "sensor-status"`
 * Modify the Status\*- and INFLUXDB-settings in get-sensor-status.sh as needed
 * Run the script from cron every 15 minutes
 
