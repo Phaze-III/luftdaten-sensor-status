@@ -18,7 +18,7 @@ at:
 * curl: https://curl.haxx.se/
 * html2text: https://github.com/grobian/html2text
 
-* **No** Python :)
+**No** Python required :)
 
 # Usage
 
