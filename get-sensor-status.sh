@@ -27,7 +27,7 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                           gsub(/.*: +/, "", $1) ;
                           print Sensor ",key=" key " string=\"" $1 "\" " ts ;
                           gsub(/NRZ-....-/, "", $1) ;
-                          gsub(/-.*/, "", $1) ;
+                          gsub(/[\/-].*/, "", $1) ;
                           Version = $1 ;
                           next ;
                         }
