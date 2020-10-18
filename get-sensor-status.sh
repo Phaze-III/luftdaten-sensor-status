@@ -76,6 +76,7 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                           if ( key == "Uptime" && Seconds < 3600 ) {
                              tsboot = ts - Seconds ;
                              print Sensor ",Reset=1,key=Last\\ OTA string=\"-\",value=0,qtime=" ts " " tsboot ;
+                             print Sensor ",Reset=1,key=Data\\ Send\\ Return string=\"-\",value=0,qtime=" ts " " tsboot ;
                              split("Wifi|SDS011|Sensirion\\ SPS30", ERRORS, "|") ;
                              for ( error in ERRORS ) {
                                 print Sensor ",Reset=1,key=" ERRORS[error] "\\ Errors value=0,qtime=" ts " " tsboot ;
