@@ -22,9 +22,9 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
        /ID:/            { gsub(/ID: +/, "", $1) ; gsub(/ (.*)/, "", $1) ; Sensor=$1 ; next }
-       /Firmware:/      { 
+       /:.*NRZ-....-/   {
                           key = "Firmware" ; 
-                          gsub(/Firmware: +/, "", $1) ;
+                          gsub(/.*: +/, "", $1) ;
                           print Sensor ",key=" key " string=\"" $1 "\" " ts ;
                           gsub(/NRZ-....-/, "", $1) ;
                           gsub(/-.*/, "", $1) ;
