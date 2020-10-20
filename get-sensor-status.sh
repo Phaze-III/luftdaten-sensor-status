@@ -31,10 +31,11 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                           Version = $1 ;
                           next ;
                         }
-       !/\|/            { next }
-       /\|[A-Za-z0-9]+/ { 
+       !/\|/            { key = "" ; next }
+       /\|[[:alnum:]]+/ { 
+                          key = "" ;
                           if ( $2 ~ /^ *$|^(Par|Пара)|Firmware/) { next } ;
-                          if ( $3 ~ /^ *$/) { next } ;
+                          if ( $3 ~ /^ *$|^[[:alnum:]]+:/) { next } ;
                           gsub(/ ms$/, "", $3) ;
                           gsub(/ %$/, "", $3) ;
                           key = $2 ;
@@ -65,7 +66,7 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                           Seconds = 24 * 3600 * days + 3600 * hours + 60 * mins + secs ;
                           fields=( "value=" Seconds "," );
                         }
-                        {
+       key != ""        {
                           gsub(/ /, "\\ ", key) ;
                           if ( $3 ~ /^[0-9]+$/) {
                              fields=( fields "value=" $3 ) ;
@@ -90,6 +91,7 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                                 print Sensor ",Reset=1,key=Data\\ Send\\ Errors value=0,qtime=" ts " " tsboot ;
                              }
                           }
+                        key = "" ;
                         }
       ' | curl -sS -X POST --data-binary @/dev/stdin \
              "http://${INFLUXDB_HOST}:${INFLUXDB_PORT}/write?db=${INFLUXDB_DATABASE}&precision=${INFLUXDB_PRECISION}"
