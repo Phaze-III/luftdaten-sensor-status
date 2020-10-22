@@ -73,7 +73,9 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                              fields=( fields "string=\"" $3 "\"" ) ;
                              if ( key == "WiFi Errors" ) {
                                 gsub(/\/.*/, "", $3) ;
-                                fields=( fields ",value=" $3 ) ;
+                                if ( $3 ~ /^[0-9]+$/) {
+                                   fields=( fields ",value=" $3 ) ;
+                                }
                              }
                           }
                           gsub(/ /, "\\ ", key) ;
