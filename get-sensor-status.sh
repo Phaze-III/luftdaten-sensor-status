@@ -67,12 +67,16 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                           fields=( "value=" Seconds "," );
                         }
        key != ""        {
-                          gsub(/ /, "\\ ", key) ;
                           if ( $3 ~ /^[0-9]+$/) {
                              fields=( fields "value=" $3 ) ;
                           } else { 
                              fields=( fields "string=\"" $3 "\"" ) ;
+                             if ( key == "WiFi Errors" ) {
+                                gsub(/\/.*/, "", $3) ;
+                                fields=( fields ",value=" $3 ) ;
+                             }
                           }
+                          gsub(/ /, "\\ ", key) ;
                           print Sensor ",key=" key " " fields " " ts ;
                           if ( key == "Uptime" && Seconds < 3600 ) {
                              tsboot = ts - Seconds ;
