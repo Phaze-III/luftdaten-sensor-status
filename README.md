@@ -1,13 +1,15 @@
 # luftdaten-sensor-status
-Fetch system status info from a Luftdaten sensor and convert to influx line protocol
+Fetch system status info from a Sensor.Community (previously Luftdaten)
+sensor and convert to influx line protocol
 
+Includes a Grafana-dashboard to visualize the information.
 # Requirements
 
 Should work on most Unix(tm)/Linux flavours with the standard tools and
 two additional packages (see Dependencies).
 
-Tested on BSD (Mac OSX and FreeBSD) and Luftdaten firmware NRZ-2020-129,
-NRZ-2020-130-B\* and NRZ-2020-131 with a SDS011 sensor.
+Tested on BSD (Mac OSX and FreeBSD) and airrohr-firmware NRZ-2020-129
+to NRZ-2020-133 with a SDS011 sensor.
 
 # Dependencies
 
@@ -28,5 +30,6 @@ at:
 
 # Additional information
 
-* https://luftdaten.info/
+* https://sensor.community/en/sensors/airrohr/
 * https://github.com/opendata-stuttgart/sensors-software
+* https://luftdaten.info/
