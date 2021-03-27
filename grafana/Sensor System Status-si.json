@@ -20,28 +20,28 @@
       "name": "VAR_INTL_NUMBER_OF_MEASUREMENTS",
       "type": "constant",
       "label": "INTL_NUMBER_OF_MEASUREMENTS",
-      "value": "Broj merenja",
+      "value": "Število meritev",
       "description": ""
     },
     {
       "name": "VAR_INTL_TIME_SENDING_MS",
       "type": "constant",
       "label": "INTL_TIME_SENDING_MS",
-      "value": "Vreme utrošeno za slanje",
+      "value": "Čas, porabljen za nalaganje",
       "description": ""
     },
     {
       "name": "VAR_INTL_ERROR",
       "type": "constant",
       "label": "INTL_ERROR",
-      "value": "greške",
+      "value": "samo napake",
       "description": ""
     },
     {
       "name": "VAR_INTL_DEVICE_STATUS",
       "type": "constant",
       "label": "INTL_DEVICE_STATUS",
-      "value": "Status uređaja",
+      "value": "Stanje naprave",
       "description": ""
     }
   ],
@@ -1281,7 +1281,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:5668",
-          "alias": "Vreme utrošeno za slanje",
+          "alias": "Čas, porabljen za nalaganje",
           "color": "#FADE2A"
         }
       ],
@@ -1812,7 +1812,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:1011",
-          "alias": "Broj merenja",
+          "alias": "Število meritev",
           "color": "#3274D9"
         }
       ],

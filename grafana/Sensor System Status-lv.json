@@ -20,28 +20,28 @@
       "name": "VAR_INTL_NUMBER_OF_MEASUREMENTS",
       "type": "constant",
       "label": "INTL_NUMBER_OF_MEASUREMENTS",
-      "value": "Broj merenja",
+      "value": "Mērījumu skaits",
       "description": ""
     },
     {
       "name": "VAR_INTL_TIME_SENDING_MS",
       "type": "constant",
       "label": "INTL_TIME_SENDING_MS",
-      "value": "Vreme utrošeno za slanje",
+      "value": "Laiks, kas pavadīts, augšupielādējot",
       "description": ""
     },
     {
       "name": "VAR_INTL_ERROR",
       "type": "constant",
       "label": "INTL_ERROR",
-      "value": "greške",
+      "value": "tikai kļūdas",
       "description": ""
     },
     {
       "name": "VAR_INTL_DEVICE_STATUS",
       "type": "constant",
       "label": "INTL_DEVICE_STATUS",
-      "value": "Status uređaja",
+      "value": "Ierīces statuss",
       "description": ""
     }
   ],
@@ -1281,7 +1281,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:5668",
-          "alias": "Vreme utrošeno za slanje",
+          "alias": "Laiks, kas pavadīts, augšupielādējot",
           "color": "#FADE2A"
         }
       ],
@@ -1812,7 +1812,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:1011",
-          "alias": "Broj merenja",
+          "alias": "Mērījumu skaits",
           "color": "#3274D9"
         }
       ],
