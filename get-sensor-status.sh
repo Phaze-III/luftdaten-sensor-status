@@ -34,7 +34,7 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
        !/\|/            { key = "" ; next }
        /\|[[:alnum:]]+/ { 
                           key = "" ;
-                          if ( $2 ~ /^ *$|^(Par|Пара)|Firmware/) { next } ;
+                          if ( $2 ~ /^ *$|^(Par|Пара|参数|Παρ|パラメ)|Firmware/) { next } ;
                           if ( $3 ~ /^ *$|^[[:alnum:]]+:/) { next } ;
                           gsub(/ ms$/, "", $3) ;
                           gsub(/ %$/, "", $3) ;
