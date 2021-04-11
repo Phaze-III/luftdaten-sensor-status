@@ -67,13 +67,13 @@ curl -sS --connect-timeout 20 "${StatusURL}" |\
                           fields=( "value=" Seconds "," );
                         }
        key != ""        {
-                          if ( $3 ~ /^[0-9]+$/) {
+                          if ( $3 ~ /^[0-9.]+$/) {
                              fields=( fields "value=" $3 ) ;
                           } else { 
                              fields=( fields "string=\"" $3 "\"" ) ;
                              if ( key == "WiFi Errors" ) {
                                 gsub(/\/.*/, "", $3) ;
-                                if ( $3 ~ /^[0-9]+$/) {
+                                if ( $3 ~ /^[0-9.]+$/) {
                                    fields=( fields ",value=" $3 ) ;
                                 }
                              }
