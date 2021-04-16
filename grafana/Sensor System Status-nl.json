@@ -43,6 +43,13 @@
       "label": "INTL_DEVICE_STATUS",
       "value": "Apparaatstatus",
       "description": ""
+    },
+    {
+      "name": "VAR_INTERVAL",
+      "type": "constant",
+      "label": "Interval",
+      "value": "145000",
+      "description": ""
     }
   ],
   "__requires": [
@@ -121,7 +128,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1600015166258,
+  "iteration": 1618570299317,
   "links": [],
   "panels": [
     {
@@ -1354,7 +1361,7 @@
       "yaxes": [
         {
           "$$hashKey": "object:4072",
-          "format": "dtdurationms",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1775,10 +1782,11 @@
     },
     {
       "aliasColors": {},
-      "bars": true,
+      "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "${DS_SENSOR-STATUS}",
+      "description": "",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1788,18 +1796,18 @@
         "y": 14
       },
       "hiddenSeries": false,
-      "id": 12,
+      "id": 28,
       "interval": "15m",
       "legend": {
         "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
-      "lines": false,
+      "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
@@ -1811,17 +1819,21 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "$$hashKey": "object:1011",
-          "alias": "Aantal metingen",
-          "color": "#3274D9"
+          "$$hashKey": "object:5668",
+          "alias": "Connection failed",
+          "color": "#E02F44",
+          "fill": 0,
+          "linewidth": 5,
+          "steppedLine": false,
+          "yaxis": 2
         }
       ],
       "spaceLength": 10,
       "stack": false,
-      "steppedLine": true,
+      "steppedLine": false,
       "targets": [
         {
-          "alias": "$INTL_NUMBER_OF_MEASUREMENTS",
+          "alias": "Connect",
           "groupBy": [
             {
               "params": [
@@ -1831,7 +1843,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1852,27 +1864,190 @@
               {
                 "params": [],
                 "type": "last"
-              },
-              {
-                "params": [],
-                "type": "non_negative_difference"
               }
             ]
           ],
           "tags": [
             {
               "key": "key",
-              "operator": "=~",
-              "value": "/^$INTL_NUMBER_OF_MEASUREMENTS$/"
+              "operator": "=",
+              "value": "curl-time-connect"
             }
           ]
+        },
+        {
+          "alias": "Pre-transfer",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-time-pretransfer"
+            }
+          ]
+        },
+        {
+          "alias": "Start transfer",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-time-starttransfer"
+            }
+          ]
+        },
+        {
+          "alias": "Total time",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-time-total"
+            }
+          ]
+        },
+        {
+          "alias": "Connection failed",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"value\") FROM /^$Sensor$/ WHERE (\"key\" = 'curl-time-connect' AND \"value\" = 0) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$INTL_NUMBER_OF_MEASUREMENTS",
+      "title": "Web server response times",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1888,21 +2063,21 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:2404",
-          "decimals": 0,
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:2405",
-          "format": "short",
+          "$$hashKey": "object:4072",
+          "decimals": null,
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:4073",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "0",
           "min": null,
           "show": false
         }
@@ -2079,7 +2254,18 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:669",
+          "alias": "Rate",
+          "yaxis": 1
+        },
+        {
+          "$$hashKey": "object:676",
+          "alias": "Samples",
+          "yaxis": 2
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -2100,6 +2286,7 @@
               "type": "fill"
             }
           ],
+          "hide": true,
           "measurement": "/^$Measurement$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2126,6 +2313,44 @@
               "value": "/^$Node$/"
             }
           ]
+        },
+        {
+          "alias": "Rate",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"rate\") FROM (select \"samples\"/($Interval/1000) AS \"rate\" FROM /^$Measurement$/ WHERE (\"node\" =~ /^$Node$/) AND $timeFilter) GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "thresholds": [],
@@ -2149,7 +2374,7 @@
       "yaxes": [
         {
           "$$hashKey": "object:1060",
-          "format": "none",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2183,6 +2408,135 @@
         "h": 6,
         "w": 12,
         "x": 0,
+        "y": 27
+      },
+      "hiddenSeries": false,
+      "id": 24,
+      "interval": "3m",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Min. Cycle",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "min_micro"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Min. Cycle",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1332",
+          "decimals": 0,
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1333",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_LUFTDATEN}",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
         "y": 27
       },
       "hiddenSeries": false,
@@ -2302,21 +2656,21 @@
     },
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LUFTDATEN}",
+      "datasource": "${DS_SENSOR-STATUS}",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 12,
-        "x": 12,
-        "y": 27
+        "x": 0,
+        "y": 33
       },
       "hiddenSeries": false,
-      "id": 24,
-      "interval": "3m",
+      "id": 12,
+      "interval": "15m",
       "legend": {
         "avg": false,
         "current": false,
@@ -2326,7 +2680,7 @@
         "total": false,
         "values": false
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
@@ -2336,13 +2690,19 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:1011",
+          "alias": "Aantal metingen",
+          "color": "#3274D9"
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
-      "steppedLine": false,
+      "steppedLine": true,
       "targets": [
         {
-          "alias": "Min. Cycle",
+          "alias": "$INTL_NUMBER_OF_MEASUREMENTS",
           "groupBy": [
             {
               "params": [
@@ -2352,12 +2712,12 @@
             },
             {
               "params": [
-                "null"
+                "linear"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "/^$Measurement$/",
+          "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -2366,21 +2726,25 @@
             [
               {
                 "params": [
-                  "min_micro"
+                  "value"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "last"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
               }
             ]
           ],
           "tags": [
             {
-              "key": "node",
+              "key": "key",
               "operator": "=~",
-              "value": "/^$Node$/"
+              "value": "/^$INTL_NUMBER_OF_MEASUREMENTS$/"
             }
           ]
         }
@@ -2389,7 +2753,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Min. Cycle",
+      "title": "$INTL_NUMBER_OF_MEASUREMENTS",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2405,23 +2769,23 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1332",
+          "$$hashKey": "object:2404",
           "decimals": 0,
-          "format": "none",
+          "format": "short",
           "label": "",
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
-          "$$hashKey": "object:1333",
+          "$$hashKey": "object:2405",
           "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -2576,6 +2940,24 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "value": "${VAR_INTERVAL}",
+          "text": "${VAR_INTERVAL}"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "Interval",
+        "options": [
+          {
+            "value": "${VAR_INTERVAL}",
+            "text": "${VAR_INTERVAL}"
+          }
+        ],
+        "query": "${VAR_INTERVAL}",
+        "skipUrlSync": false,
+        "type": "constant"
       }
     ]
   },
