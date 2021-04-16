@@ -4,6 +4,10 @@
 StatusURL="${LuftdatenStatusURL:-http://192.168.1.42/status}"
 # Change to keep a HTML copy
 StatusPage="/dev/null"
+# Change to your Sensor ID if you want curl timings stored under your
+# Sensor ID InfluxDB measurement in case of connection failures.
+# 'unknown' is used otherwise.
+SensorID="${LuftdatenSensorID:-unknown}"
 
 # InfluxDB settings
 INFLUXDB_DATABASE="${INFLUXDB_DATABASE:-sensor-status}"
@@ -13,11 +17,22 @@ INFLUXDB_PRECISION="${INFLUXDB_PRECISION:-s}"
 
 TimeStamp=${TimeStamp:-$(date -u +%s)}
 
-curl -sS --connect-timeout 20 "${StatusURL}" |\
+curl -sS --connect-timeout 20 \
+     --write-out "<table >\r
+                          <tr><td>curl-time-connect</td><td>%{time_connect}</td></tr>\r
+                          <tr><td>curl-time-pretransfer</td><td>%{time_pretransfer}</td></tr>\r
+                          <tr><td>curl-time-starttransfer</td><td>%{time_starttransfer}</td></tr>\r
+                          <tr><td>curl-time-total</td><td>%{time_total}</td></tr>\r
+                  </table>\r
+                  </body>\r\n</html>\r\n" \
+     "${StatusURL}" |\
+    sed -e "s%</body></html>%%" |\
     tee ${StatusPage} |\
     sed "s/<table /<table border=\'1\' /" |\
     html2text -ascii |\
-    awk -F\| -v OFS=, -v ts=${TimeStamp} \
+    awk -F\| -v OFS=, \
+             -v ts=${TimeStamp} \
+             -v Sensor=${SensorID} \
       '
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
