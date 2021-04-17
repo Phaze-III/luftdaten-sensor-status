@@ -128,7 +128,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618570299317,
+  "iteration": 1618652181899,
   "links": [],
   "panels": [
     {
@@ -2330,11 +2330,50 @@
               "type": "fill"
             }
           ],
+          "hide": true,
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT mean(\"rate\") FROM (select \"samples\"/($Interval/1000) AS \"rate\" FROM /^$Measurement$/ WHERE (\"node\" =~ /^$Node$/) AND $timeFilter) GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Rate",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"rate\") FROM (select \"samples\"/(\"interval\"/1000) AS \"rate\" FROM /^$Measurement$/ WHERE (\"node\" =~ /^$Node$/) AND $timeFilter) GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "C",
           "resultFormat": "time_series",
           "select": [
             [
