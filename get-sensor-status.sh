@@ -23,6 +23,7 @@ curl -sS --connect-timeout 20 \
                           <tr><td>curl-time-pretransfer</td><td>%{time_pretransfer}</td></tr>\r
                           <tr><td>curl-time-starttransfer</td><td>%{time_starttransfer}</td></tr>\r
                           <tr><td>curl-time-total</td><td>%{time_total}</td></tr>\r
+                          <tr><td>curl-errormsg</td><td>%{errormsg}</td></tr>\r
                   </table>\r
                   </body>\r\n</html>\r\n" \
      "${StatusURL}" |\

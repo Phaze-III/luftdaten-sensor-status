@@ -13,9 +13,9 @@ to NRZ-2020-134 with a SDS011 sensor.
 
 # Dependencies
 
-The script depends on _curl_ and _html2text_, both most likely available in
-the package repositories of your OS distribution. Source code is available
-at:
+The script depends on _curl_ _(7.75.0 or higher)_ and _html2text_, both most
+likely available in the package repositories of your OS distribution. Source
+code is available at:
 
 * curl: https://curl.haxx.se/
 * html2text: https://github.com/grobian/html2text
