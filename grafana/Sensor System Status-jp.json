@@ -121,6 +121,19 @@
         "showIn": 0,
         "tags": [],
         "type": "tags"
+      },
+      {
+        "$$hashKey": "object:511",
+        "datasource": "${DS_SENSOR-STATUS}",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#FF780A",
+        "limit": 100,
+        "name": "Curl Errors",
+        "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"key\" = 'curl-errormsg') AND $timeFilter",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
@@ -128,7 +141,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618652181899,
+  "iteration": 1619377511332,
   "links": [],
   "panels": [
     {
