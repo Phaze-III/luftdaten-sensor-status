@@ -141,7 +141,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619377511332,
+  "iteration": 1620658690453,
   "links": [],
   "panels": [
     {
@@ -2707,6 +2707,710 @@
       }
     },
     {
+      "columns": [
+        {
+          "$$hashKey": "object:315",
+          "text": "Avg",
+          "value": "avg"
+        },
+        {
+          "$$hashKey": "object:317",
+          "text": "Min",
+          "value": "min"
+        },
+        {
+          "$$hashKey": "object:319",
+          "text": "Max",
+          "value": "max"
+        },
+        {
+          "$$hashKey": "object:321",
+          "text": "Count",
+          "value": "count"
+        }
+      ],
+      "datasource": "${DS_LUFTDATEN}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
+      "id": 30,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:323",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Metric",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:346",
+          "alias": "Data points",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Count",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:357",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "/M[ia][nx]/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:368",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        }
+      ],
+      "targets": [
+        {
+          "alias": "Samples",
+          "groupBy": [],
+          "hide": true,
+          "measurement": "/^$Measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "samples"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
+        },
+        {
+          "alias": "Sample Rate",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": true,
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"rate\" FROM (select \"samples\"/($Interval/1000) AS \"rate\" FROM /^$Measurement$/ WHERE (\"node\" =~ /^$Node$/) AND $timeFilter) ",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Sample Rate",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"rate\" FROM (select \"samples\"/(\"interval\"/1000) AS \"rate\" FROM /^$Measurement$/ WHERE (\"node\" =~ /^$Node$/) AND $timeFilter) ",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Max. Cycle",
+          "groupBy": [],
+          "measurement": "/^$Measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "max_micro"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
+        },
+        {
+          "alias": "Min. Cycle",
+          "groupBy": [],
+          "measurement": "/^$Measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "min_micro"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "node",
+              "operator": "=~",
+              "value": "/^$Node$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Firmware statistics",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
+    {
+      "columns": [
+        {
+          "$$hashKey": "object:3909",
+          "text": "Avg",
+          "value": "avg"
+        },
+        {
+          "$$hashKey": "object:3911",
+          "text": "Min",
+          "value": "min"
+        },
+        {
+          "$$hashKey": "object:3913",
+          "text": "Max",
+          "value": "max"
+        },
+        {
+          "$$hashKey": "object:3915",
+          "text": "Count",
+          "value": "count"
+        }
+      ],
+      "datasource": "${DS_SENSOR-STATUS}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 33
+      },
+      "id": 34,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:4760",
+          "alias": "Data points",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Count",
+          "thresholds": [
+            ""
+          ],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:3881",
+          "alias": "",
+          "align": "",
+          "colorMode": "value",
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "decimals": 3,
+          "pattern": "/.*/",
+          "thresholds": [
+            "0.5",
+            "20"
+          ],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "alias": "Connect",
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-time-connect"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": ">",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "alias": "Pre-transfer",
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-time-pretransfer"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": ">",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "alias": "Start transfer",
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-time-starttransfer"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": ">",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "alias": "Time Total",
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-time-total"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": ">",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "alias": "Errors",
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "string"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "curl-errormsg"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Web server performance statistics (seconds)",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
+    {
+      "columns": [
+        {
+          "$$hashKey": "object:2523",
+          "text": "Avg",
+          "value": "avg"
+        },
+        {
+          "$$hashKey": "object:2525",
+          "text": "Min",
+          "value": "min"
+        },
+        {
+          "$$hashKey": "object:2527",
+          "text": "Max",
+          "value": "max"
+        },
+        {
+          "$$hashKey": "object:2529",
+          "text": "Count",
+          "value": "count"
+        }
+      ],
+      "datasource": "${DS_SENSOR-STATUS}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 38
+      },
+      "id": 32,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:2531",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Metric",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:2957",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Count",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:2968",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "/M[ia][nx]/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:2495",
+          "alias": "",
+          "align": "right",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "alias": "Free Memory",
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Free Memory"
+            }
+          ]
+        },
+        {
+          "alias": "Heap Fragmentation",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "Heap Fragmentation"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Memory statistics",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
+    {
       "aliasColors": {},
       "bars": true,
       "dashLength": 10,
@@ -2718,7 +3422,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 33
+        "y": 42
       },
       "hiddenSeries": false,
       "id": 12,
