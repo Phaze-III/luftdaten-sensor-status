@@ -3319,7 +3319,7 @@
         {
           "$$hashKey": "object:2495",
           "alias": "",
-          "align": "right",
+          "align": "",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -3330,7 +3330,7 @@
           "pattern": "/.*/",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "none"
         }
       ],
       "targets": [
