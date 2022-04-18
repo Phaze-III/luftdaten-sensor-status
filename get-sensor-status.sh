@@ -17,7 +17,7 @@ INFLUXDB_PRECISION="${INFLUXDB_PRECISION:-s}"
 
 TimeStamp=${TimeStamp:-$(date -u +%s)}
 
-curl -sS --connect-timeout 20 \
+curl -sS --connect-timeout 20 --max-time 60 \
      --write-out "<table >\r
                           <tr><td>curl-time-connect</td><td>%{time_connect}</td></tr>\r
                           <tr><td>curl-time-pretransfer</td><td>%{time_pretransfer}</td></tr>\r
