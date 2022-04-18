@@ -30,7 +30,7 @@ curl -sS --connect-timeout 20 \
     sed -e "s%</body></html>%%" |\
     tee ${StatusPage} |\
     sed "s/<table /<table border=\'1\' /" |\
-    html2text -ascii |\
+    html2text -width 120 -ascii |\
     awk -F\| -v OFS=, \
              -v ts=${TimeStamp} \
              -v Sensor=${SensorID} \
