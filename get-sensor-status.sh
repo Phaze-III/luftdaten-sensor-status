@@ -35,6 +35,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
              -v ts=${TimeStamp} \
              -v Sensor=${SensorID} \
       '
+       BEGIN            { ntpcount = 0 }
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
        /ID:/            { gsub(/ID: +/, "", $1) ; gsub(/ (.*)/, "", $1) ; Sensor=$1 ; next }
@@ -46,6 +47,16 @@ curl -sS --connect-timeout 20 --max-time 60 \
                           gsub(/[\/-].*/, "", $1) ;
                           Version = $1 ;
                           next ;
+                        }
+       /reachable/      {
+                          if ( /\|NTP Info\|/ )
+                          {
+                            ntp = $3 ;
+                          } else {
+                            ntp = ( ntp "\n" $3 )
+                          }
+                          ntpcount += 1
+                          next
                         }
        !/\|/            { key = "" ; next }
        /\|[[:alnum:]]+/ { 
@@ -114,6 +125,12 @@ curl -sS --connect-timeout 20 --max-time 60 \
                              }
                           }
                         key = "" ;
+                        }
+       END              {
+                          if ( ntpcount >= 1 )
+                          {
+                              print Sensor ",key=NTP\\ Info string=\"" ntp "\" " ts ;
+                          }
                         }
       ' | curl -sS -X POST --data-binary @/dev/stdin \
              "http://${INFLUXDB_HOST}:${INFLUXDB_PORT}/write?db=${INFLUXDB_DATABASE}&precision=${INFLUXDB_PRECISION}"
