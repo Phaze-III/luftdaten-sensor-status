@@ -15,6 +15,14 @@ INFLUXDB_HOST="${INFLUXDB_HOST:-localhost}"
 INFLUXDB_PORT="${INFLUXDB_PORT:-8086}"
 INFLUXDB_PRECISION="${INFLUXDB_PRECISION:-s}"
 
+# Check for recent version of html2text
+if html2text -help | grep -q utf8
+then
+  HTML2TEXT_ENCODING="-utf8"
+else
+  HTML2TEXT_ENCODING="-ascii"
+fi
+
 TimeStamp=${TimeStamp:-$(date -u +%s)}
 
 curl -sS --connect-timeout 20 --max-time 60 \
@@ -30,12 +38,13 @@ curl -sS --connect-timeout 20 --max-time 60 \
     sed -e "s%</body></html>%%" |\
     tee ${StatusPage} |\
     sed "s/<table /<table border=\'1\' /" |\
-    html2text -width 120 -ascii |\
+    html2text -width 120 ${HTML2TEXT_ENCODING} |\
     awk -F\| -v OFS=, \
              -v ts=${TimeStamp} \
              -v Sensor=${SensorID} \
       '
        BEGIN            { ntpcount = 0 }
+                        { gsub(/\xc2\xa0/," ",$0) }  # replace NBSP with normal space
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
        /ID:/            { gsub(/ID: +/, "", $1) ; gsub(/ (.*)/, "", $1) ; Sensor=$1 ; next }
