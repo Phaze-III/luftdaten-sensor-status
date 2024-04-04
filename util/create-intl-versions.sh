@@ -5,7 +5,7 @@ INTL_NUMBER_OF_MEASUREMENTS="Anzahl Messungen"
 INTL_TIME_SENDING_MS="Dauer Messübertragung"
 INTL_DEVICE_STATUS="Gerätestatus"
 
-for lang in bg cn cz dk ee en es fi fr gr hu it jp lt lu lv nl pl pt ro rs ru se si sk tr ua
+for lang in bg br cn cz dk ee en es fi fr gr hu it jp lt lu lv nl pl pt ro rs ru se si sk tr ua
 do
   cp -p "Sensor System Status-de.json" "Sensor System Status-${lang}.json"
 done
@@ -30,6 +30,10 @@ bg INTL_DEVICE_STATUS "Статус на устройството"
 bg INTL_ERROR "само грешки"
 bg INTL_NUMBER_OF_MEASUREMENTS "Брой измервания"
 bg INTL_TIME_SENDING_MS "Време, прекарано в изпращане"
+br INTL_DEVICE_STATUS "Status do dispositivo"
+br INTL_ERROR "erro"
+br INTL_NUMBER_OF_MEASUREMENTS "Quantidade de medições"
+br INTL_TIME_SENDING_MS "Duração de transmissão de medições"
 cn INTL_DEVICE_STATUS "设备状态"
 cn INTL_ERROR "唯恐有误"
 cn INTL_NUMBER_OF_MEASUREMENTS "测量数量"

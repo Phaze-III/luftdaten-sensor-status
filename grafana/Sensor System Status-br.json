@@ -27,7 +27,7 @@
       "name": "VAR_INTL_TIME_SENDING_MS",
       "type": "constant",
       "label": "INTL_TIME_SENDING_MS",
-      "value": "Duração da transmissão das medições",
+      "value": "Duração de transmissão de medições",
       "description": ""
     },
     {
@@ -41,7 +41,7 @@
       "name": "VAR_INTL_DEVICE_STATUS",
       "type": "constant",
       "label": "INTL_DEVICE_STATUS",
-      "value": "Estado do dispositivo",
+      "value": "Status do dispositivo",
       "description": ""
     },
     {
@@ -1422,7 +1422,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:5668",
-          "alias": "Duração da transmissão das medições",
+          "alias": "Duração de transmissão de medições",
           "color": "#FADE2A"
         }
       ],

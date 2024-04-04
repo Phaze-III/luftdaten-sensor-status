@@ -52,17 +52,18 @@
       "description": ""
     }
   ],
+  "__elements": {},
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.7.4"
+      "version": "10.3.3"
     },
     {
       "type": "panel",
       "id": "graph",
-      "name": "Graph",
+      "name": "Graph (old)",
       "version": ""
     },
     {
@@ -79,8 +80,8 @@
     },
     {
       "type": "panel",
-      "id": "table",
-      "name": "Table",
+      "id": "table-old",
+      "name": "Table (old)",
       "version": ""
     }
   ],
@@ -89,7 +90,10 @@
       {
         "$$hashKey": "object:86",
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -98,7 +102,10 @@
       },
       {
         "$$hashKey": "object:6029",
-        "datasource": "${DS_SENSOR-STATUS}",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_SENSOR-STATUS}"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#AD0317",
@@ -107,11 +114,21 @@
         "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"Reset\" = '1' AND \"key\" = 'Reset Reason') AND $timeFilter",
         "showIn": 0,
         "tags": [],
+        "target": {
+          "fromAnnotations": true,
+          "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"Reset\" = '1' AND \"key\" = 'Reset Reason') AND $timeFilter",
+          "rawQuery": true,
+          "refId": "Anno",
+          "textEditor": true
+        },
         "type": "tags"
       },
       {
         "$$hashKey": "object:343",
-        "datasource": "${DS_SENSOR-STATUS}",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_SENSOR-STATUS}"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#8AB8FF",
@@ -120,11 +137,21 @@
         "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"key\" = 'Annotation') AND $timeFilter",
         "showIn": 0,
         "tags": [],
+        "target": {
+          "fromAnnotations": true,
+          "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"key\" = 'Annotation') AND $timeFilter",
+          "rawQuery": true,
+          "refId": "Anno",
+          "textEditor": true
+        },
         "type": "tags"
       },
       {
         "$$hashKey": "object:511",
-        "datasource": "${DS_SENSOR-STATUS}",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_SENSOR-STATUS}"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#FF780A",
@@ -133,20 +160,30 @@
         "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"key\" = 'curl-errormsg') AND $timeFilter",
         "showIn": 0,
         "tags": [],
+        "target": {
+          "fromAnnotations": true,
+          "query": "SELECT \"string\" FROM /^$Sensor$/ WHERE (\"key\" = 'curl-errormsg') AND $timeFilter",
+          "rawQuery": true,
+          "refId": "Anno",
+          "textEditor": true
+        },
         "type": "tags"
       }
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1620658690453,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "columns": [],
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "description": "",
       "fontSize": "90%",
       "gridPos": {
@@ -157,7 +194,6 @@
       },
       "id": 27,
       "interval": "",
-      "pageSize": null,
       "showHeader": true,
       "sort": {
         "col": 0,
@@ -168,7 +204,6 @@
           "$$hashKey": "object:1438",
           "alias": "",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -187,7 +222,6 @@
           "$$hashKey": "object:673",
           "alias": " ",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -206,7 +240,6 @@
           "$$hashKey": "object:2224",
           "alias": " ",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -224,6 +257,10 @@
       "targets": [
         {
           "alias": "Data Send Return",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "hide": false,
           "measurement": "/^$Sensor$/",
@@ -255,6 +292,10 @@
         },
         {
           "alias": "Last OTA",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "hide": false,
           "measurement": "/^$Sensor$/",
@@ -286,6 +327,10 @@
         },
         {
           "alias": "NTP Info",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "hide": false,
           "measurement": "/^$Sensor$/",
@@ -317,6 +362,10 @@
         },
         {
           "alias": "$INTL_NUMBER_OF_MEASUREMENTS",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "hide": false,
           "measurement": "/^$Sensor$/",
@@ -348,6 +397,10 @@
         },
         {
           "alias": "Uptime",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "hide": false,
           "measurement": "/^$Sensor$/",
@@ -379,6 +432,10 @@
         },
         {
           "alias": "Firmware",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "hide": false,
           "measurement": "/^$Sensor$/",
@@ -409,11 +466,9 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "$INTL_DEVICE_STATUS",
       "transform": "timeseries_to_rows",
-      "type": "table"
+      "type": "table-old"
     },
     {
       "aliasColors": {
@@ -424,8 +479,18 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -452,9 +517,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -506,6 +572,10 @@
       "targets": [
         {
           "alias": "SDS011",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -553,6 +623,10 @@
         },
         {
           "alias": "SPS30",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -600,6 +674,10 @@
         },
         {
           "alias": "WiFi",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -653,6 +731,10 @@
         },
         {
           "alias": "Data Send",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -701,6 +783,10 @@
         },
         {
           "alias": "InfluxDB",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -749,6 +835,10 @@
         },
         {
           "alias": "Madavi.de",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -797,6 +887,10 @@
         },
         {
           "alias": "Sensor.Community",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -845,6 +939,10 @@
         },
         {
           "alias": "OpenSenseMap.org",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -893,6 +991,10 @@
         },
         {
           "alias": "Feinstaub-App",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -941,6 +1043,10 @@
         },
         {
           "alias": "aircms.online",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -989,6 +1095,10 @@
         },
         {
           "alias": "Custom",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1037,9 +1147,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "$INTL_ERROR",
       "tooltip": {
         "shared": true,
@@ -1048,9 +1156,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1061,23 +1167,19 @@
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "$$hashKey": "object:2006",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": false
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -1088,8 +1190,18 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
@@ -1114,9 +1226,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1133,6 +1246,10 @@
       "targets": [
         {
           "alias": "Free Memory",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1176,6 +1293,10 @@
         },
         {
           "alias": "Heap Fragmentation",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1219,9 +1340,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Memory",
       "tooltip": {
         "shared": true,
@@ -1230,9 +1349,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1240,25 +1357,18 @@
         {
           "$$hashKey": "object:1670",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:1671",
           "format": "percent",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -1266,8 +1376,18 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1292,9 +1412,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1311,6 +1432,10 @@
       "targets": [
         {
           "alias": "$INTL_TIME_SENDING_MS",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1354,9 +1479,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "$INTL_TIME_SENDING_MS",
       "tooltip": {
         "shared": true,
@@ -1365,9 +1488,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1375,32 +1496,22 @@
         {
           "$$hashKey": "object:4072",
           "format": "ms",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:4073",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "cards": {
-        "cardPadding": null,
-        "cardRound": null
-      },
+      "cards": {},
       "color": {
         "cardColor": "#b4ff00",
         "colorScale": "sqrt",
@@ -1410,8 +1521,27 @@
         "mode": "spectrum"
       },
       "dataFormat": "tsbuckets",
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 7,
         "w": 12,
@@ -1426,11 +1556,54 @@
       "legend": {
         "show": false
       },
-      "pluginVersion": "6.7.3",
+      "options": {
+        "calculate": false,
+        "calculation": {},
+        "cellGap": 2,
+        "cellValues": {},
+        "color": {
+          "exponent": 0.5,
+          "fill": "#b4ff00",
+          "max": 4,
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Reds",
+          "steps": 128
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": false
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "showColorScale": false,
+          "yHistogram": true
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false,
+          "unit": "short"
+        }
+      },
+      "pluginVersion": "10.3.3",
       "reverseYBuckets": false,
       "targets": [
         {
           "alias": "Power On",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1474,6 +1647,10 @@
         },
         {
           "alias": "Software/System restart",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1523,6 +1700,10 @@
         },
         {
           "alias": "Hardware Watchdog",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1572,6 +1753,10 @@
         },
         {
           "alias": "Exception",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1621,6 +1806,10 @@
         },
         {
           "alias": "External System",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1670,6 +1859,10 @@
         },
         {
           "alias": "Software Watchdog",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1719,6 +1912,10 @@
         },
         {
           "alias": "Deep-Sleep Wake",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1767,8 +1964,6 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Reset Reasons",
       "tooltip": {
         "show": true,
@@ -1778,28 +1973,30 @@
       "xAxis": {
         "show": true
       },
-      "xBucketNumber": null,
-      "xBucketSize": null,
       "yAxis": {
-        "decimals": null,
         "format": "short",
         "logBase": 1,
-        "max": null,
-        "min": null,
-        "show": true,
-        "splitFactor": null
+        "show": true
       },
-      "yBucketBound": "auto",
-      "yBucketNumber": null,
-      "yBucketSize": null
+      "yBucketBound": "auto"
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1824,9 +2021,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1847,6 +2045,10 @@
       "targets": [
         {
           "alias": "Connect",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1890,6 +2092,10 @@
         },
         {
           "alias": "Pre-transfer",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1933,6 +2139,10 @@
         },
         {
           "alias": "Start transfer",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1976,6 +2186,10 @@
         },
         {
           "alias": "Total time",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2019,6 +2233,10 @@
         },
         {
           "alias": "Connection failed",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2057,9 +2275,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Web server response times",
       "tooltip": {
         "shared": true,
@@ -2068,36 +2284,27 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "$$hashKey": "object:4072",
-          "decimals": null,
           "format": "s",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:4073",
           "format": "short",
-          "label": null,
           "logBase": 1,
           "max": "0",
-          "min": null,
           "show": false
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2105,8 +2312,18 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LUFTDATEN}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_LUFTDATEN}"
+      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2131,9 +2348,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2144,6 +2362,10 @@
       "targets": [
         {
           "alias": "WiFi signal",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2187,9 +2409,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "WiFi signal",
       "tooltip": {
         "shared": true,
@@ -2198,9 +2418,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -2211,23 +2429,17 @@
           "format": "dBm",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:881",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2235,8 +2447,18 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LUFTDATEN}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_LUFTDATEN}"
+      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2261,9 +2483,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2285,6 +2508,10 @@
       "targets": [
         {
           "alias": "Samples",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2329,6 +2556,10 @@
         },
         {
           "alias": "Rate",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2368,6 +2599,10 @@
         },
         {
           "alias": "Rate",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2406,9 +2641,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Samples",
       "tooltip": {
         "shared": true,
@@ -2417,9 +2650,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -2427,25 +2658,18 @@
         {
           "$$hashKey": "object:1060",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:1061",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2453,7 +2677,17 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LUFTDATEN}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_LUFTDATEN}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2478,9 +2712,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2491,6 +2726,10 @@
       "targets": [
         {
           "alias": "Min. Cycle",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2534,9 +2773,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Min. Cycle",
       "tooltip": {
         "shared": true,
@@ -2545,9 +2782,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -2558,23 +2793,17 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:1333",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2582,7 +2811,17 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LUFTDATEN}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_LUFTDATEN}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2607,9 +2846,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2620,6 +2860,10 @@
       "targets": [
         {
           "alias": "Max. Cycle",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2663,9 +2907,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Max. Cycle",
       "tooltip": {
         "shared": true,
@@ -2674,9 +2916,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -2687,23 +2927,17 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:1333",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2729,7 +2963,10 @@
           "value": "count"
         }
       ],
-      "datasource": "${DS_LUFTDATEN}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_LUFTDATEN}"
+      },
       "fontSize": "100%",
       "gridPos": {
         "h": 5,
@@ -2738,10 +2975,8 @@
         "y": 33
       },
       "id": 30,
-      "pageSize": null,
       "showHeader": true,
       "sort": {
-        "col": null,
         "desc": false
       },
       "styles": [
@@ -2749,7 +2984,6 @@
           "$$hashKey": "object:323",
           "alias": "",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -2767,7 +3001,6 @@
           "$$hashKey": "object:346",
           "alias": "Data points",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -2785,7 +3018,6 @@
           "$$hashKey": "object:357",
           "alias": "",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -2803,7 +3035,6 @@
           "$$hashKey": "object:368",
           "alias": "",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -2821,6 +3052,10 @@
       "targets": [
         {
           "alias": "Samples",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [],
           "hide": true,
           "measurement": "/^$Measurement$/",
@@ -2848,6 +3083,10 @@
         },
         {
           "alias": "Sample Rate",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2887,6 +3126,10 @@
         },
         {
           "alias": "Sample Rate",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2925,6 +3168,10 @@
         },
         {
           "alias": "Max. Cycle",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [],
           "measurement": "/^$Measurement$/",
           "orderByTime": "ASC",
@@ -2951,6 +3198,10 @@
         },
         {
           "alias": "Min. Cycle",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_LUFTDATEN}"
+          },
           "groupBy": [],
           "measurement": "/^$Measurement$/",
           "orderByTime": "ASC",
@@ -2976,11 +3227,9 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Firmware statistics",
       "transform": "timeseries_aggregations",
-      "type": "table"
+      "type": "table-old"
     },
     {
       "columns": [
@@ -3005,7 +3254,10 @@
           "value": "count"
         }
       ],
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "fontSize": "100%",
       "gridPos": {
         "h": 9,
@@ -3014,10 +3266,8 @@
         "y": 33
       },
       "id": 34,
-      "pageSize": null,
       "showHeader": true,
       "sort": {
-        "col": null,
         "desc": false
       },
       "styles": [
@@ -3025,7 +3275,6 @@
           "$$hashKey": "object:4760",
           "alias": "Data points",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -3064,6 +3313,10 @@
       "targets": [
         {
           "alias": "Connect",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
@@ -3096,6 +3349,10 @@
         },
         {
           "alias": "Pre-transfer",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
@@ -3128,6 +3385,10 @@
         },
         {
           "alias": "Start transfer",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
@@ -3160,6 +3421,10 @@
         },
         {
           "alias": "Time Total",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
@@ -3192,6 +3457,10 @@
         },
         {
           "alias": "Errors",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
@@ -3217,11 +3486,9 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Web server performance statistics (seconds)",
       "transform": "timeseries_aggregations",
-      "type": "table"
+      "type": "table-old"
     },
     {
       "columns": [
@@ -3246,7 +3513,10 @@
           "value": "count"
         }
       ],
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
       "fontSize": "100%",
       "gridPos": {
         "h": 4,
@@ -3255,10 +3525,8 @@
         "y": 38
       },
       "id": 32,
-      "pageSize": null,
       "showHeader": true,
       "sort": {
-        "col": null,
         "desc": false
       },
       "styles": [
@@ -3266,7 +3534,6 @@
           "$$hashKey": "object:2531",
           "alias": "",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -3284,7 +3551,6 @@
           "$$hashKey": "object:2957",
           "alias": "Data points",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -3302,7 +3568,6 @@
           "$$hashKey": "object:2968",
           "alias": "",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -3320,7 +3585,6 @@
           "$$hashKey": "object:2495",
           "alias": "",
           "align": "",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -3336,6 +3600,10 @@
       "targets": [
         {
           "alias": "Free Memory",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [],
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
@@ -3362,6 +3630,10 @@
         },
         {
           "alias": "Heap Fragmentation",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -3404,18 +3676,26 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Memory statistics",
       "transform": "timeseries_aggregations",
-      "type": "table"
+      "type": "table-old"
     },
     {
       "aliasColors": {},
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_SENSOR-STATUS}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_SENSOR-STATUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -3440,9 +3720,10 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3459,6 +3740,10 @@
       "targets": [
         {
           "alias": "$INTL_NUMBER_OF_MEASUREMENTS",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
           "groupBy": [
             {
               "params": [
@@ -3506,9 +3791,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "$INTL_NUMBER_OF_MEASUREMENTS",
       "tooltip": {
         "shared": true,
@@ -3517,9 +3800,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -3530,41 +3811,35 @@
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "$$hashKey": "object:2405",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": false
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
   "refresh": "15m",
-  "schemaVersion": 22,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {},
-        "datasource": "${DS_SENSOR-STATUS}",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_SENSOR-STATUS}"
+        },
         "definition": "show measurements",
         "hide": 0,
         "includeAll": false,
-        "index": -1,
-        "label": null,
         "multi": false,
         "name": "Sensor",
         "options": [],
@@ -3574,91 +3849,95 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
+        "hide": 2,
+        "name": "INTL_NUMBER_OF_MEASUREMENTS",
+        "query": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}",
+        "skipUrlSync": false,
+        "type": "constant",
         "current": {
           "value": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}",
-          "text": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}"
+          "text": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}",
+          "selected": false
         },
-        "hide": 2,
-        "label": null,
-        "name": "INTL_NUMBER_OF_MEASUREMENTS",
         "options": [
           {
             "value": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}",
-            "text": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}"
+            "text": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}",
+            "selected": false
           }
-        ],
-        "query": "${VAR_INTL_NUMBER_OF_MEASUREMENTS}",
-        "skipUrlSync": false,
-        "type": "constant"
+        ]
       },
       {
+        "hide": 2,
+        "name": "INTL_TIME_SENDING_MS",
+        "query": "${VAR_INTL_TIME_SENDING_MS}",
+        "skipUrlSync": false,
+        "type": "constant",
         "current": {
           "value": "${VAR_INTL_TIME_SENDING_MS}",
-          "text": "${VAR_INTL_TIME_SENDING_MS}"
+          "text": "${VAR_INTL_TIME_SENDING_MS}",
+          "selected": false
         },
-        "hide": 2,
-        "label": null,
-        "name": "INTL_TIME_SENDING_MS",
         "options": [
           {
             "value": "${VAR_INTL_TIME_SENDING_MS}",
-            "text": "${VAR_INTL_TIME_SENDING_MS}"
+            "text": "${VAR_INTL_TIME_SENDING_MS}",
+            "selected": false
           }
-        ],
-        "query": "${VAR_INTL_TIME_SENDING_MS}",
-        "skipUrlSync": false,
-        "type": "constant"
+        ]
       },
       {
+        "hide": 2,
+        "name": "INTL_ERROR",
+        "query": "${VAR_INTL_ERROR}",
+        "skipUrlSync": false,
+        "type": "constant",
         "current": {
           "value": "${VAR_INTL_ERROR}",
-          "text": "${VAR_INTL_ERROR}"
+          "text": "${VAR_INTL_ERROR}",
+          "selected": false
         },
-        "hide": 2,
-        "label": null,
-        "name": "INTL_ERROR",
         "options": [
           {
             "value": "${VAR_INTL_ERROR}",
-            "text": "${VAR_INTL_ERROR}"
+            "text": "${VAR_INTL_ERROR}",
+            "selected": false
           }
-        ],
-        "query": "${VAR_INTL_ERROR}",
-        "skipUrlSync": false,
-        "type": "constant"
+        ]
       },
       {
+        "hide": 2,
+        "name": "INTL_DEVICE_STATUS",
+        "query": "${VAR_INTL_DEVICE_STATUS}",
+        "skipUrlSync": false,
+        "type": "constant",
         "current": {
           "value": "${VAR_INTL_DEVICE_STATUS}",
-          "text": "${VAR_INTL_DEVICE_STATUS}"
+          "text": "${VAR_INTL_DEVICE_STATUS}",
+          "selected": false
         },
-        "hide": 2,
-        "label": null,
-        "name": "INTL_DEVICE_STATUS",
         "options": [
           {
             "value": "${VAR_INTL_DEVICE_STATUS}",
-            "text": "${VAR_INTL_DEVICE_STATUS}"
+            "text": "${VAR_INTL_DEVICE_STATUS}",
+            "selected": false
           }
-        ],
-        "query": "${VAR_INTL_DEVICE_STATUS}",
-        "skipUrlSync": false,
-        "type": "constant"
+        ]
       },
       {
-        "allValue": null,
         "current": {},
-        "datasource": "${DS_LUFTDATEN}",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_LUFTDATEN}"
+        },
         "definition": "show measurements",
         "hide": 1,
         "includeAll": false,
-        "index": -1,
         "label": "Sensor",
         "multi": false,
         "name": "Measurement",
@@ -3669,20 +3948,19 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {},
-        "datasource": "${DS_LUFTDATEN}",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_LUFTDATEN}"
+        },
         "definition": "SHOW TAG VALUES WITH KEY = node WHERE (_name =~ /^$Measurement$/)",
         "hide": 1,
         "includeAll": false,
-        "index": -1,
-        "label": null,
         "multi": false,
         "name": "Node",
         "options": [],
@@ -3692,28 +3970,28 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
+        "hide": 2,
+        "name": "Interval",
+        "query": "${VAR_INTERVAL}",
+        "skipUrlSync": false,
+        "type": "constant",
         "current": {
           "value": "${VAR_INTERVAL}",
-          "text": "${VAR_INTERVAL}"
+          "text": "${VAR_INTERVAL}",
+          "selected": false
         },
-        "hide": 2,
-        "label": null,
-        "name": "Interval",
         "options": [
           {
             "value": "${VAR_INTERVAL}",
-            "text": "${VAR_INTERVAL}"
+            "text": "${VAR_INTERVAL}",
+            "selected": false
           }
-        ],
-        "query": "${VAR_INTERVAL}",
-        "skipUrlSync": false,
-        "type": "constant"
+        ]
       }
     ]
   },
@@ -3737,8 +4015,6 @@
   },
   "timezone": "",
   "title": "Sensor System Status",
-  "variables": {
-    "list": []
-  },
-  "version": 4
+  "version": 1,
+  "weekStart": ""
 }

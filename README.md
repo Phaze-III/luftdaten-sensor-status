@@ -9,7 +9,7 @@ Should work on most Unix(tm)/Linux flavours with the standard tools and
 two additional packages (see Dependencies).
 
 Tested on BSD (Mac OSX and FreeBSD) and airrohr-firmware NRZ-2020-129
-to NRZ-2020-134 with a SDS011 sensor.
+to NRZ-2024-134 with a SDS011 sensor.
 
 # Dependencies
 
@@ -32,4 +32,4 @@ code is available at:
 
 * https://sensor.community/en/sensors/airrohr/
 * https://github.com/opendata-stuttgart/sensors-software
-* https://luftdaten.info/
+* https://sensor.community/
