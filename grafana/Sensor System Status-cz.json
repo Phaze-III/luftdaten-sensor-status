@@ -27,7 +27,7 @@
       "name": "VAR_INTL_TIME_SENDING_MS",
       "type": "constant",
       "label": "INTL_TIME_SENDING_MS",
-      "value": "Poèet mìøení",
+      "value": "Doba nahrávání",
       "description": ""
     },
     {
@@ -41,7 +41,7 @@
       "name": "VAR_INTL_DEVICE_STATUS",
       "type": "constant",
       "label": "INTL_DEVICE_STATUS",
-      "value": "stav pohonu",
+      "value": "Stav zařízení",
       "description": ""
     },
     {
@@ -1422,7 +1422,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:5668",
-          "alias": "Poèet mìøení",
+          "alias": "Doba nahrávání",
           "color": "#FADE2A"
         }
       ],
