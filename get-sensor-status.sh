@@ -44,7 +44,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
              -v Sensor=${SensorID} \
       '
        BEGIN            { ntpcount = 0 }
-                        { gsub(/\xc2\xa0/," ",$0) }  # replace NBSP with normal space
+                        { gsub(/\u00a0|\xc2\xa0/," ",$0) }  # replace NBSP (Unicode code point or multibyte UTF-8) with normal space
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
        /ID:/            { gsub(/ID: +/, "", $1) ; gsub(/ (.*)/, "", $1) ; Sensor=$1 ; next }
