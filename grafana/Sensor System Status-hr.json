@@ -20,28 +20,28 @@
       "name": "VAR_INTL_NUMBER_OF_MEASUREMENTS",
       "type": "constant",
       "label": "INTL_NUMBER_OF_MEASUREMENTS",
-      "value": "Liczba pomiarów",
+      "value": "Broj mjerenja",
       "description": ""
     },
     {
       "name": "VAR_INTL_TIME_SENDING_MS",
       "type": "constant",
       "label": "INTL_TIME_SENDING_MS",
-      "value": "Czas spędzony na wysyłce",
+      "value": "Vrijeme utrošeno na slanje podataka",
       "description": ""
     },
     {
       "name": "VAR_INTL_ERROR",
       "type": "constant",
       "label": "INTL_ERROR",
-      "value": "Błędy",
+      "value": "greške",
       "description": ""
     },
     {
       "name": "VAR_INTL_DEVICE_STATUS",
       "type": "constant",
       "label": "INTL_DEVICE_STATUS",
-      "value": "Stan urządzenia",
+      "value": "Status uređaja",
       "description": ""
     },
     {
@@ -1676,7 +1676,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Czas spędzony na wysyłce"
+              "options": "Vrijeme utrošeno na slanje podataka"
             },
             "properties": [
               {
@@ -4105,7 +4105,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Liczba pomiarów"
+              "options": "Broj mjerenja"
             },
             "properties": [
               {
