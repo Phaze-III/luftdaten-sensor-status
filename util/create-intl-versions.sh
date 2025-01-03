@@ -5,7 +5,7 @@ INTL_NUMBER_OF_MEASUREMENTS="Anzahl Messungen"
 INTL_TIME_SENDING_MS="Dauer Messübertragung"
 INTL_DEVICE_STATUS="Gerätestatus"
 
-for lang in bg br cn cz dk ee en es fi fr gr hu it jp lt lu lv nl pl pt ro rs ru se si sk tr ua
+for lang in bg br cn cz dk ee en es fi fr gr hr hu it jp lt lu lv nl pl pt ro rs ru se si sk tr ua
 do
   cp -p "Sensor System Status-de.json" "Sensor System Status-${lang}.json"
 done
@@ -70,6 +70,10 @@ gr INTL_DEVICE_STATUS "Κατάσταση συσκευής"
 gr INTL_ERROR "μόνο σφάλματα"
 gr INTL_NUMBER_OF_MEASUREMENTS "Αριθμός μετρήσεων"
 gr INTL_TIME_SENDING_MS "Χρόνος μεταφόρτωσης"
+hr INTL_DEVICE_STATUS "Status uređaja"
+hr INTL_ERROR "greške"
+hr INTL_NUMBER_OF_MEASUREMENTS "Broj mjerenja"
+hr INTL_TIME_SENDING_MS "Vrijeme utrošeno na slanje podataka"
 hu INTL_DEVICE_STATUS "Eszköz státusz"
 hu INTL_ERROR "csak hibajelzések"
 hu INTL_NUMBER_OF_MEASUREMENTS "Mérések száma:"
