@@ -103,7 +103,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
                           fields=( "value=" Seconds "," );
                         }
        key != ""        {
-                          if ( $3 ~ /^[0-9.]+$/) {
+                          if ( $3 ~ /^[0-9.]+$/ && key != "Data Send Return" ) {
                              fields=( fields "value=" $3 ) ;
                           } else { 
                              fields=( fields "string=\"" $3 "\"" ) ;
