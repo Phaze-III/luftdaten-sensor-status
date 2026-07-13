@@ -58,7 +58,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.4.0"
+      "version": "13.0.1"
     },
     {
       "type": "panel",
@@ -91,7 +91,7 @@
         "$$hashKey": "object:86",
         "builtIn": 1,
         "datasource": {
-          "type": "datasource",
+          "type": "grafana",
           "uid": "grafana"
         },
         "enable": true,
@@ -120,8 +120,7 @@
           "rawQuery": true,
           "refId": "Anno",
           "textEditor": true
-        },
-        "type": "tags"
+        }
       },
       {
         "$$hashKey": "object:343",
@@ -143,8 +142,7 @@
           "rawQuery": true,
           "refId": "Anno",
           "textEditor": true
-        },
-        "type": "tags"
+        }
       },
       {
         "$$hashKey": "object:511",
@@ -166,40 +164,40 @@
           "rawQuery": true,
           "refId": "Anno",
           "textEditor": true
-        },
-        "type": "tags"
+        }
       }
     ]
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "influxdb",
         "uid": "${DS_SENSOR-STATUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
             "cellOptions": {
-              "type": "auto",
-              "wrapText": false
+              "type": "auto"
             },
-            "inspect": false
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false,
+            "wrapText": false
           },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -232,17 +230,9 @@
       "id": 35,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": false
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Firmware",
@@ -251,7 +241,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -286,7 +275,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -321,7 +309,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -356,7 +343,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -391,7 +377,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -426,7 +411,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -461,7 +445,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -472,6 +455,40 @@
               {
                 "params": [
                   "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "key",
+              "operator": "=",
+              "value": "OTA Return"
+            }
+          ]
+        },
+        {
+          "alias": "OTA Return",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_SENSOR-STATUS}"
+          },
+          "groupBy": [],
+          "measurement": "/^$Sensor$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "string"
                 ],
                 "type": "field"
               },
@@ -503,6 +520,22 @@
               "last"
             ]
           }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNotNull",
+                  "options": {}
+                },
+                "fieldName": "Last"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
         }
       ],
       "type": "table"
@@ -512,7 +545,6 @@
         "type": "influxdb",
         "uid": "${DS_SENSOR-STATUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -542,6 +574,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -552,15 +585,13 @@
             }
           },
           "decimals": 0,
-          "links": [],
-          "mappings": [],
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -788,6 +819,10 @@
       "interval": "15m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -795,11 +830,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "SDS011",
@@ -980,7 +1016,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1032,7 +1067,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1084,7 +1118,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1136,7 +1169,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1188,7 +1220,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1240,7 +1271,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1292,7 +1322,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1344,7 +1373,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1385,7 +1413,6 @@
         "type": "influxdb",
         "uid": "${DS_SENSOR-STATUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1415,6 +1442,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1424,14 +1452,12 @@
               "mode": "off"
             }
           },
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1500,6 +1526,10 @@
       "interval": "15m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -1507,11 +1537,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Free Memory",
@@ -1616,7 +1647,6 @@
         "type": "influxdb",
         "uid": "${DS_SENSOR-STATUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1646,6 +1676,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1655,14 +1686,12 @@
               "mode": "off"
             }
           },
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1700,6 +1729,10 @@
       "interval": "15m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -1707,11 +1740,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "$INTL_TIME_SENDING_MS",
@@ -1769,7 +1803,6 @@
         "type": "influxdb",
         "uid": "${DS_SENSOR-STATUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -1794,6 +1827,10 @@
       "id": 18,
       "interval": "1h",
       "options": {
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "calculate": false,
         "calculation": {},
         "cellGap": 2,
@@ -1832,7 +1869,7 @@
           "unit": "short"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Power On",
@@ -2208,7 +2245,6 @@
         "type": "influxdb",
         "uid": "${DS_SENSOR-STATUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2238,6 +2274,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2247,14 +2284,12 @@
               "mode": "off"
             }
           },
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2316,6 +2351,10 @@
       "interval": "15m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -2323,11 +2362,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Connect",
@@ -2568,7 +2608,6 @@
         "type": "influxdb",
         "uid": "${DS_LUFTDATEN}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2598,6 +2637,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2608,14 +2648,12 @@
             }
           },
           "decimals": 0,
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2637,6 +2675,10 @@
       "interval": "3m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -2644,11 +2686,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "WiFi signal",
@@ -2706,7 +2749,6 @@
         "type": "influxdb",
         "uid": "${DS_LUFTDATEN}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2736,6 +2778,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2746,14 +2789,12 @@
             }
           },
           "decimals": 2,
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2775,6 +2816,10 @@
       "interval": "3m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -2782,11 +2827,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Samples",
@@ -2959,6 +3005,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2969,14 +3016,12 @@
             }
           },
           "decimals": 0,
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2998,6 +3043,10 @@
       "interval": "3m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -3005,11 +3054,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Min. Cycle",
@@ -3096,6 +3146,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -3106,14 +3157,12 @@
             }
           },
           "decimals": 0,
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -3135,6 +3184,10 @@
       "interval": "3m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -3142,11 +3195,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Max. Cycle",
@@ -3204,7 +3258,6 @@
         "type": "influxdb",
         "uid": "${DS_LUFTDATEN}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3216,18 +3269,20 @@
               "type": "auto"
             },
             "filterable": false,
+            "footer": {
+              "reducers": []
+            },
             "inspect": false,
             "minWidth": 90
           },
           "decimals": 0,
           "displayName": "",
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -3289,17 +3344,9 @@
       "id": 36,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Samples",
@@ -3404,7 +3451,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$Measurement$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -3517,7 +3563,6 @@
         "type": "influxdb",
         "uid": "${DS_SENSOR-STATUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3529,18 +3574,20 @@
               "type": "auto"
             },
             "filterable": false,
+            "footer": {
+              "reducers": []
+            },
             "inspect": false,
             "minWidth": 80
           },
           "decimals": 0,
           "displayName": "",
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -3606,17 +3653,9 @@
       "id": 37,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Free Memory",
@@ -3712,18 +3751,20 @@
               "type": "color-text"
             },
             "filterable": false,
+            "footer": {
+              "reducers": []
+            },
             "inspect": false,
             "minWidth": 70
           },
           "decimals": 3,
           "displayName": "",
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -3766,7 +3807,7 @@
                   "steps": [
                     {
                       "color": "green",
-                      "value": null
+                      "value": 0
                     },
                     {
                       "color": "#EAB839",
@@ -3833,18 +3874,10 @@
       "id": 38,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "Connect",
@@ -3997,7 +4030,6 @@
             "uid": "${DS_SENSOR-STATUS}"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "/^$Sensor$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -4073,6 +4105,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -4083,15 +4116,13 @@
             }
           },
           "decimals": 0,
-          "links": [],
-          "mappings": [],
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -4129,6 +4160,10 @@
       "interval": "15m",
       "options": {
         "alertThreshold": true,
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -4136,11 +4171,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "alias": "$INTL_NUMBER_OF_MEASUREMENTS",
@@ -4198,12 +4234,14 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "15m",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
       {
+        "allowCustomValue": true,
         "current": {},
         "datasource": {
           "type": "influxdb",
@@ -4295,6 +4333,7 @@
         ]
       },
       {
+        "allowCustomValue": true,
         "current": {},
         "datasource": {
           "type": "influxdb",
@@ -4312,6 +4351,7 @@
         "type": "query"
       },
       {
+        "allowCustomValue": true,
         "current": {},
         "datasource": {
           "type": "influxdb",
@@ -4353,8 +4393,8 @@
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
+  "timezone": "browser",
   "title": "Sensor System Status",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
