@@ -24,6 +24,17 @@ INTL_LAST_OVER_THE_AIR="Last OTA"
 INTL_UPTIME="Uptime"
 INTL_REACHABLE="reachable"
 
+# Pre-NRZ-2024-136-B2 strings used to 'untranslate' NRZ-2024-136-B2+ status pages
+ORIG_RESET_REASON="Reset Reason"
+ORIG_DATA_SEND_RETURN_CODE="Data Send Return"
+ORIG_LAST_OVER_THE_AIR="Last OTA"
+ORIG_UPTIME="Uptime"
+ORIG_REACHABLE="reachable"
+ORIG_HEAP_FRAGMENTATION="Heap Fragmentation"
+ORIG_FREE_MEMORY="Free Memory"
+ORIG_YES="Yes"
+ORIG_NO="No"
+
 # Check for recent version of html2text
 if html2text -help | grep -q utf8
 then
@@ -47,6 +58,26 @@ curl -sS --connect-timeout 20 --max-time 60 \
     sed -e "s%</body></html>%%" |\
     tee ${StatusPage} |\
     sed "s/<table /<table border=\'1\' /" |\
+    # 'Untranslate' NRZ-2024-136-B2+ Status page translations to
+    # preserve backwards compatibility for now
+    sed \
+        -e "s/Daten senden Return Code/${ORIG_DATA_SEND_RETURN_CODE}/" \
+        -e "s/Aktiv seit/${ORIG_UPTIME}/" \
+        -e "s/Grund des Zurücksetzens/${ORIG_RESET_REASON}/" \
+        -e "s/Heap Fragmentierung/${ORIG_HEAP_FRAGMENTATION}/" \
+        -e "s/Freier Speicher/${ORIG_FREE_MEMORY}/" \
+        -e "s/Letztes OTA/${ORIG_LAST_OVER_THE_AIR}/" \
+        -e "s/Gegevens versturen Return Code/${ORIG_DATA_SEND_RETURN_CODE}/" \
+        -e "s/Reden herstart/${ORIG_RESET_REASON}/" \
+        -e "s/Heap fragmentatie/${ORIG_HEAP_FRAGMENTATION}/" \
+        -e "s/Vrij geheugen/${ORIG_FREE_MEMORY}/" \
+        -e "s/Laatste OTA/${ORIG_LAST_OVER_THE_AIR}/" \
+        -e "s/erreichbar/${ORIG_REACHABLE}/" \
+        -e "s/bereikbaar/${ORIG_REACHABLE}/" \
+        -e "s/Ja/${ORIG_YES}/" \
+        -e "s/Nein/${ORIG_NO}/" \
+        -e "s/Nee/${ORIG_NO}/" \
+        |\
     html2text -width 120 ${HTML2TEXT_ENCODING} |\
     awk -F\| -v OFS=, \
              -v ts=${TimeStamp} \
@@ -61,6 +92,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
                         { gsub(/\u00a0|\xc2\xa0/," ",$0) }  # replace NBSP (Unicode code point or multibyte UTF-8) with normal space
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "", $0) }  # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
+                        { gsub(/\[\[/, "", $0) ; gsub(/\]\]/, "", $0) } # remove [[]] brackets from not yet translated items
        /ID:/            { gsub(/ID: +/, "", $1) ; gsub(/ (.*)/, "", $1) ; Sensor=$1 ; next }
        /:.*NRZ-....-/   {
                           key = "Firmware" ; 
