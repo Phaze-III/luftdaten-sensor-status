@@ -72,11 +72,11 @@ curl -sS --connect-timeout 20 --max-time 60 \
         -e "s/Heap fragmentatie/${ORIG_HEAP_FRAGMENTATION}/" \
         -e "s/Vrij geheugen/${ORIG_FREE_MEMORY}/" \
         -e "s/Laatste OTA/${ORIG_LAST_OVER_THE_AIR}/" \
-        -e "s/erreichbar/${ORIG_REACHABLE}/" \
-        -e "s/bereikbaar/${ORIG_REACHABLE}/" \
-        -e "s/Ja/${ORIG_YES}/" \
-        -e "s/Nein/${ORIG_NO}/" \
-        -e "s/Nee/${ORIG_NO}/" \
+        -e "s/erreichbar/${ORIG_REACHABLE}/g" \
+        -e "s/bereikbaar/${ORIG_REACHABLE}/g" \
+        -e "s/Ja/${ORIG_YES}/g" \
+        -e "s/Nein/${ORIG_NO}/g" \
+        -e "s/Nee/${ORIG_NO}/g" \
         |\
     html2text -width 120 ${HTML2TEXT_ENCODING} |\
     awk -F\| -v OFS=, \
