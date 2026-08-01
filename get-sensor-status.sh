@@ -15,6 +15,13 @@ INFLUXDB_HOST="${INFLUXDB_HOST:-localhost}"
 INFLUXDB_PORT="${INFLUXDB_PORT:-8086}"
 INFLUXDB_PRECISION="${INFLUXDB_PRECISION:-s}"
 
+# INTL strings to be used as awk variables
+INTL_RESET_REASON="Reset Reason"
+INTL_DATA_SEND_RETURN_CODE="Data Send Return"
+INTL_LAST_OVER_THE_AIR="Last OTA"
+INTL_UPTIME="Uptime"
+INTL_REACHABLE="reachable"
+
 # Check for recent version of html2text
 if html2text -help | grep -q utf8
 then
@@ -42,6 +49,11 @@ curl -sS --connect-timeout 20 --max-time 60 \
     awk -F\| -v OFS=, \
              -v ts=${TimeStamp} \
              -v Sensor=${SensorID} \
+             -v reachable="${INTL_REACHABLE}" \
+             -v ResetReason="${INTL_RESET_REASON}" \
+             -v DataSendReturnCode="${INTL_DATA_SEND_RETURN_CODE}" \
+             -v LastOTA="${INTL_LAST_OVER_THE_AIR}" \
+             -v Uptime="${INTL_UPTIME}" \
       '
        BEGIN            { ntpcount = 0 }
                         { gsub(/\u00a0|\xc2\xa0/," ",$0) }  # replace NBSP (Unicode code point or multibyte UTF-8) with normal space
@@ -57,7 +69,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
                           Version = $1 ;
                           next ;
                         }
-       /reachable/      {
+       $0 ~ reachable   {
                           if ( /\|NTP Info\|/ )
                           {
                             ntp = $3 ;
@@ -83,14 +95,15 @@ curl -sS --connect-timeout 20 --max-time 60 \
        /SPS30[|0-9]+$/                    { key = ( key " Errors" ) }
        key ~ /Sensor.Community|Madavi.de|OpenSenseMap.org|Feinstaub-App|aircms.online|InfluxDB|Custom/ \
                                           { key = ( key " API" ) }
-       /Reset Reason/   {
+       $0 ~ ResetReason   {
                           reason = $3 ;
                           gsub(/^[ \t]+|[ \t]+$/, "", reason) ;
                           if ( tsboot > 1 ) {
-                             print Sensor ",Reset=1,key=Reset\\ Reason string=\"" reason "\",value=0,qtime=" ts " " tsboot ;
+                             gsub(/ /, "\\ ", ResetReason) ;
+                             print Sensor ",Reset=1,key=" ResetReason " string=\"" reason "\",value=0,qtime=" ts " " tsboot ;
                           }
                         }
-       /Uptime|Last OTA/ {
+       $0 ~ Uptime || $0 ~ LastOTA {
                           days=0; hours=0; mins=0; secs=0;
                           split($3, time, ",");
                           for (i in time) {
@@ -103,7 +116,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
                           fields=( "value=" Seconds "," );
                         }
        key != ""        {
-                          if ( $3 ~ /^[0-9.]+$/ && key != "Data Send Return" ) {
+                          if ( $3 ~ /^[0-9.]+$/ && key != DataSendReturnCode ) {
                              fields=( fields "value=" $3 ) ;
                           } else { 
                              fields=( fields "string=\"" $3 "\"" ) ;
@@ -114,12 +127,20 @@ curl -sS --connect-timeout 20 --max-time 60 \
                                 }
                              }
                           }
-                          gsub(/ /, "\\ ", key) ;
-                          print Sensor ",key=" key " " fields " " ts ;
-                          if ( key == "Uptime" && Seconds < 3600 ) {
+                          if ( key != Uptime ) {
+                             gsub(/ /, "\\ ", key) ;
+                             print Sensor ",key=" key " " fields " " ts ;
+                          } else {
+                             gsub(/ /, "\\ ", key) ;
+                             print Sensor ",key=" key " " fields " " ts ;
+                             gsub(/\\ /, " ", key) ;
+                          }
+                          if ( key == Uptime && Seconds < 3600 ) {
                              tsboot = ts - Seconds ;
-                             print Sensor ",Reset=1,key=Last\\ OTA string=\"-\",value=0,qtime=" ts " " tsboot ;
-                             print Sensor ",Reset=1,key=Data\\ Send\\ Return string=\"-\",value=0,qtime=" ts " " tsboot ;
+                             gsub(/ /, "\\ ", LastOTA) ;
+                             gsub(/ /, "\\ ", DataSendReturnCode) ;
+                             print Sensor ",Reset=1,key=" LastOTA " string=\"-\",value=0,qtime=" ts " " tsboot ;
+                             print Sensor ",Reset=1,key=" DataSendReturnCode " string=\"-\",value=0,qtime=" ts " " tsboot ;
                              split("Wifi|SDS011|Sensirion\\ SPS30", ERRORS, "|") ;
                              for ( error in ERRORS ) {
                                 print Sensor ",Reset=1,key=" ERRORS[error] "\\ Errors value=0,qtime=" ts " " tsboot ;
