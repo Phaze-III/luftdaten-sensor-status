@@ -1,13 +1,15 @@
 #!/bin/sh
 
-# Set this to the status URL of your sensor
-StatusURL="${LuftdatenStatusURL:-http://192.168.1.42/status}"
+# Set this to the status URL of your sensor. Alternatively call the
+# script with the IP-address of your sensor as first parameter.
+StatusURL="http://${1:-192.168.1.42}/status"
 # Change to keep a HTML copy
 StatusPage="/dev/null"
 # Change to your Sensor ID if you want curl timings stored under your
 # Sensor ID InfluxDB measurement in case of connection failures.
+# Alternatively call the script with your Sensor ID as second parameter.
 # 'unknown' is used otherwise.
-SensorID="${LuftdatenSensorID:-unknown}"
+SensorID="${2:-unknown}"
 
 # InfluxDB settings
 INFLUXDB_DATABASE="${INFLUXDB_DATABASE:-sensor-status}"
