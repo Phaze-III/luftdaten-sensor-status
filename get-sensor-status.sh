@@ -74,9 +74,9 @@ curl -sS --connect-timeout 20 --max-time 60 \
         -e "s/Laatste OTA/${ORIG_LAST_OVER_THE_AIR}/" \
         -e "s/erreichbar/${ORIG_REACHABLE}/g" \
         -e "s/bereikbaar/${ORIG_REACHABLE}/g" \
-        -e "s/Ja/${ORIG_YES}/g" \
-        -e "s/Nein/${ORIG_NO}/g" \
-        -e "s/Nee/${ORIG_NO}/g" \
+        -e "s/: Ja/: ${ORIG_YES}/g" \
+        -e "s/: Nein/: ${ORIG_NO}/g" \
+        -e "s/: Nee/: ${ORIG_NO}/g" \
         |\
     html2text -width 120 ${HTML2TEXT_ENCODING} |\
     awk -F\| -v OFS=, \
