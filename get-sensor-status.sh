@@ -92,6 +92,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
                         { gsub(/\u00a0|\xc2\xa0/," ",$0) }  # replace NBSP (Unicode code point or multibyte UTF-8) with normal space
                         { gsub(/.\b/, "", $0) ; gsub(/  +/, "", $0) ; gsub(/ \|/, "|", $0) } # original html2text
                         { gsub(/__+/, "", $0) ; gsub(/_/, " ", $0)  ; gsub(/  +/, " ", $0) } # debian-patched html2text
+                        { gsub(/\| +/, "|", $0) ; gsub(/ +\|/, "|", $0) } # trim spaces in all fields
                         { gsub(/\[\[/, "", $0) ; gsub(/\]\]/, "", $0) } # remove [[]] brackets from not yet translated items
        /ID:/            { gsub(/ID: +/, "", $1) ; gsub(/ (.*)/, "", $1) ; Sensor=$1 ; next }
        /:.*NRZ-....-/   {
@@ -194,7 +195,7 @@ curl -sS --connect-timeout 20 --max-time 60 \
        END              {
                           if ( ntpcount >= 1 )
                           {
-                              print Sensor ",key=NTP\\ Info string=\"" ntp "\" " ts ;
+                             print Sensor ",key=NTP\\ Info string=\"" ntp "\" " ts ;
                           }
                         }
       ' | curl -sS -X POST --data-binary @/dev/stdin \
