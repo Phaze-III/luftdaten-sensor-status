@@ -18,7 +18,7 @@ likely available in the package repositories of your OS distribution. Source
 code is available at:
 
 * curl: https://curl.haxx.se/
-* html2text: https://github.com/grobian/html2text
+* html2text: https://gitlab.com/grobian/html2text
 
 **No** Python required :)
 
